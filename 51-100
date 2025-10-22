@@ -1,0 +1,681 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp5
+{
+    public class Program
+    {
+        static double CelsiusToFahrenheit(double celsius)
+        {
+            return (celsius * 9 / 5) + 32;
+        }
+
+        // Задача 52: Создайте метод, возвращающий абсолютное значение числа
+        static int AbsoluteValue(int number)
+        {
+            return Math.Abs(number);
+        }
+
+        // Задача 53: Реализуйте метод, определяющий, является ли строка палиндромом
+        static bool IsPalindrome(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return true;
+
+            string cleanStr = str.Replace(" ", "").ToLower();
+            int left = 0;
+            int right = cleanStr.Length - 1;
+
+            while (left < right)
+            {
+                if (cleanStr[left] != cleanStr[right])
+                    return false;
+                left++;
+                right--;
+            }
+            return true;
+        }
+
+        // Задача 54: Напишите метод для вычисления суммы элементов массива
+        static int ArraySum(int[] array)
+        {
+            if (array == null || array.Length == 0)
+                return 0;
+
+            int sum = 0;
+            foreach (int num in array)
+            {
+                sum += num;
+            }
+            return sum;
+        }
+
+        // Задача 55: Напишите метод, проверяющий, является ли число простым
+        static bool IsPrime(int number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+
+            for (int i = 3; i <= Math.Sqrt(number); i += 2)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        // Задача 56: Реализуйте метод для нахождения максимума из трех чисел
+        static int MaxOfThree(int a, int b, int c)
+        {
+            int max = a;
+            if (b > max) max = b;
+            if (c > max) max = c;
+            return max;
+        }
+
+        // Задача 57: Создайте метод, определяющий, является ли число четным
+        static bool IsEven(int number)
+        {
+            return number % 2 == 0;
+        }
+
+        // Задача 58: Создайте метод для вычисления НОД двух чисел
+        static int GCD(int a, int b)
+        {
+            while (b != 0)
+            {
+                int temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+
+        // Задача 59: Напишите метод для преобразования градусов Цельсия в Фаренгейт
+        static double ConvertToFahrenheit(double celsius)
+        {
+            return celsius * 1.8 + 32;
+        }
+
+        // Задача 60: Реализуйте метод для нахождения максимума из трех чисел
+        static int FindMaximum(int a, int b, int c)
+        {
+            return Math.Max(a, Math.Max(b, c));
+        }
+
+        // Задача 61: Создайте метод для вычисления НОД двух чисел
+        static int GreatestCommonDivisor(int a, int b)
+        {
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+
+            while (b != 0)
+            {
+                int temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+
+        // Задача 62: Напишите метод, возвращающий квадрат числа
+        static int Square(int n)
+        {
+            return n * n;
+        }
+
+        // Задача 63: Напишите метод для подсчета количества гласных в строке
+        static int CountVowels(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return 0;
+
+            int count = 0;
+            string vowels = "aeiouаеёиоуыэюяAEIOUАЕЁИОУЫЭЮЯ";
+
+            foreach (char c in text)
+            {
+                if (vowels.Contains(c))
+                    count++;
+            }
+            return count;
+        }
+
+        // Задача 64: Реализуйте метод, возвращающий длину строки
+        static int GetStringLength(string str)
+        {
+            return str?.Length ?? 0;
+        }
+
+        // Задача 65: Реализуйте метод для сортировки массива по возрастанию
+        static int[] SortArray(int[] array)
+        {
+            if (array == null) return new int[0];
+
+            int[] sortedArray = (int[])array.Clone();
+            Array.Sort(sortedArray);
+            return sortedArray;
+        }
+
+        // Задача 66: Реализуйте метод, определяющий, является ли строка палиндромом
+        static bool CheckPalindrome(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            string cleaned = new string(input.ToLower().ToCharArray()
+                .Where(c => char.IsLetterOrDigit(c)).ToArray());
+
+            return cleaned.SequenceEqual(cleaned.Reverse());
+        }
+
+        // Задача 67: Реализуйте метод для конкатенации двух строк
+        static string Concatenate(string str1, string str2)
+        {
+            return string.Concat(str1 ?? "", str2 ?? "");
+        }
+
+        // Задача 68: Реализуйте метод, определяющий, является ли строка палиндромом
+        static bool IsStringPalindrome(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return true;
+
+            text = text.ToLower().Replace(" ", "");
+            for (int i = 0; i < text.Length / 2; i++)
+            {
+                if (text[i] != text[text.Length - 1 - i])
+                    return false;
+            }
+            return true;
+        }
+
+        // Задача 69: Реализуйте метод, определяющий, является ли строка палиндромом
+        static bool PalindromeCheck(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return true;
+
+            char[] chars = str.ToLower().ToCharArray();
+            Array.Reverse(chars);
+            string reversed = new string(chars);
+            return str.ToLower() == reversed;
+        }
+
+        // Задача 70: Напишите метод, проверяющий, является ли число простым
+        static bool CheckPrime(int number)
+        {
+            if (number < 2) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+
+            int boundary = (int)Math.Sqrt(number);
+            for (int i = 3; i <= boundary; i += 2)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        // Задача 71: Реализуйте метод, возвращающий длину строки
+        static int StringLength(string s)
+        {
+            return s == null ? 0 : s.Length;
+        }
+
+        // Задача 72: Реализуйте метод для нахождения максимума из трех чисел
+        static int MaximumOfThree(int x, int y, int z)
+        {
+            return x > y ? (x > z ? x : z) : (y > z ? y : z);
+        }
+
+        // Задача 73: Создайте метод, возвращающий абсолютное значение числа
+        static double Absolute(double number)
+        {
+            return Math.Abs(number);
+        }
+
+        // Задача 74: Реализуйте метод для конкатенации двух строк
+        static string JoinStrings(string first, string second)
+        {
+            return (first ?? "") + (second ?? "");
+        }
+
+        // Задача 75: Реализуйте метод для реверса строки
+        static string ReverseString(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
+            char[] chars = str.ToCharArray();
+            Array.Reverse(chars);
+            return new string(chars);
+        }
+
+        // Задача 76: Создайте метод для вычисления НОД двух чисел
+        static int CalculateGCD(int a, int b)
+        {
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+
+            while (b > 0)
+            {
+                int remainder = a % b;
+                a = b;
+                b = remainder;
+            }
+            return a;
+        }
+
+        // Задача 77: Реализуйте метод для конкатенации двух строк
+        static string CombineStrings(string str1, string str2)
+        {
+            return $"{str1}{str2}";
+        }
+
+        // Задача 78: Реализуйте метод для сортировки массива по возрастанию
+        static void SortArrayAscending(int[] arr)
+        {
+            if (arr == null) return;
+
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                for (int j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[i] > arr[j])
+                    {
+                        int temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+        }
+
+        // Задача 79: Напишите метод для подсчета количества гласных в строке
+        static int VowelCount(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return 0;
+
+            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я' };
+            int count = 0;
+
+            foreach (char c in text.ToLower())
+            {
+                if (Array.IndexOf(vowels, c) >= 0)
+                    count++;
+            }
+            return count;
+        }
+
+        // Задача 80: Реализуйте метод, возвращающий длину строки
+        static int GetLength(string input)
+        {
+            return input?.Length ?? 0;
+        }
+
+        // Задача 81: Реализуйте метод для реверса строки
+        static string StringReverse(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            string reversed = "";
+            for (int i = input.Length - 1; i >= 0; i--)
+            {
+                reversed += input[i];
+            }
+            return reversed;
+        }
+
+        // Задача 82: Создайте метод для вычисления НОД двух чисел
+        static int FindGCD(int a, int b)
+        {
+            if (b == 0)
+                return Math.Abs(a);
+            return FindGCD(b, a % b);
+        }
+
+        // Задача 83: Создайте метод для вычисления площади прямоугольника
+        static double RectangleArea(double length, double width)
+        {
+            return length * width;
+        }
+
+        // Задача 84: Создайте метод, определяющий, является ли число четным
+        static bool CheckEven(int num)
+        {
+            return num % 2 == 0;
+        }
+
+        // Задача 85: Создайте метод для вычисления НОД двух чисел
+        static int GCD_Recursive(int a, int b)
+        {
+            if (b == 0)
+                return Math.Abs(a);
+            return GCD_Recursive(b, a % b);
+        }
+
+        // Задача 86: Создайте метод, определяющий, является ли число четным
+        static bool IsNumberEven(int n)
+        {
+            return n % 2 == 0;
+        }
+
+        // Задача 87: Создайте метод для вычисления площади прямоугольника
+        static double CalculateArea(double a, double b)
+        {
+            return a * b;
+        }
+
+        // Задача 88: Напишите метод для подсчета количества гласных в строке
+        static int CountVowelsInString(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return 0;
+
+            string vowels = "aeiouAEIOUаеёиоуыэюяАЕЁИОУЫЭЮЯ";
+            return text.Count(c => vowels.Contains(c));
+        }
+
+        // Задача 89: Реализуйте метод, возвращающий длину строки
+        static int MeasureString(string s)
+        {
+            return s?.Length ?? 0;
+        }
+
+        // Задача 90: Реализуйте метод для нахождения максимума из трех чисел
+        static int GetMaxOfThree(int a, int b, int c)
+        {
+            int max = a;
+            if (b > max) max = b;
+            if (c > max) max = c;
+            return max;
+        }
+
+        // Задача 91: Напишите метод, проверяющий, является ли число простым
+        static bool IsPrimeNumber(int n)
+        {
+            if (n <= 1) return false;
+            if (n == 2) return true;
+            if (n % 2 == 0) return false;
+
+            for (int i = 3; i * i <= n; i += 2)
+            {
+                if (n % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        // Задача 92: Напишите метод для вычисления суммы элементов массива
+        static int SumOfArray(int[] arr)
+        {
+            if (arr == null) return 0;
+
+            int total = 0;
+            foreach (int num in arr)
+            {
+                total += num;
+            }
+            return total;
+        }
+
+        // Задача 93: Создайте метод для вычисления площади прямоугольника
+        static double ComputeRectangleArea(double length, double width)
+        {
+            return length * width;
+        }
+
+        // Задача 94: Напишите метод, проверяющий, является ли число простым
+        static bool PrimeCheck(int number)
+        {
+            if (number < 2) return false;
+            for (int i = 2; i <= Math.Sqrt(number); i++)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        // Задача 95: Напишите метод для вычисления среднего арифметического массива
+        static double ArrayAverage(int[] array)
+        {
+            if (array == null || array.Length == 0)
+                return 0;
+
+            return (double)ArraySum(array) / array.Length;
+        }
+
+        // Задача 96: Напишите метод для подсчета количества гласных в строке
+        static int CountVowelsText(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return 0;
+
+            int count = 0;
+            foreach (char c in text.ToLower())
+            {
+                if ("aeiouаеёиоуыэюя".Contains(c))
+                    count++;
+            }
+            return count;
+        }
+
+        // Задача 97: Реализуйте метод для сортировки массива по возрастанию
+        static int[] SortArrayBubble(int[] array)
+        {
+            if (array == null) return new int[0];
+
+            int[] result = (int[])array.Clone();
+            for (int i = 0; i < result.Length - 1; i++)
+            {
+                for (int j = 0; j < result.Length - i - 1; j++)
+                {
+                    if (result[j] > result[j + 1])
+                    {
+                        int temp = result[j];
+                        result[j] = result[j + 1];
+                        result[j + 1] = temp;
+                    }
+                }
+            }
+            return result;
+        }
+
+        // Задача 98: Создайте метод, выводящий таблицу умножения числа
+        static void PrintMultiplicationTable(int n)
+        {
+            Console.WriteLine($"Таблица умножения для {n}:");
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine($"{n} × {i} = {n * i}");
+            }
+        }
+
+        // Задача 99: Реализуйте метод, возвращающий длину строки
+        static int TextLength(string text)
+        {
+            return text == null ? 0 : text.Length;
+        }
+
+        // Задача 100: Создайте метод, выводящий таблицу умножения числа
+        static void DisplayMultiplicationTable(int number)
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine($"{number} x {i} = {number * i}");
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== ДЕМОНСТРАЦИЯ РАБОТЫ МЕТОДОВ (51-100) ===\n");
+
+            // Задача 51
+            Console.WriteLine("Задача 51: 25°C = " + CelsiusToFahrenheit(25) + "°F");
+
+            // Задача 52
+            Console.WriteLine("Задача 52: Абсолютное значение -10 = " + AbsoluteValue(-10));
+
+            // Задача 53
+            Console.WriteLine("Задача 53: 'madam' палиндром? " + IsPalindrome("madam"));
+
+            // Задача 54
+            Console.WriteLine("Задача 54: Сумма массива [2,4,6,8] = " + ArraySum(new int[] { 2, 4, 6, 8 }));
+
+            // Задача 55
+            Console.WriteLine("Задача 55: Число 19 простое? " + IsPrime(19));
+
+            // Задача 56
+            Console.WriteLine("Задача 56: Максимум из (5, 12, 8) = " + MaxOfThree(5, 12, 8));
+
+            // Задача 57
+            Console.WriteLine("Задача 57: Число 14 четное? " + IsEven(14));
+
+            // Задача 58
+            Console.WriteLine("Задача 58: НОД(54, 24) = " + GCD(54, 24));
+
+            // Задача 59
+            Console.WriteLine("Задача 59: 0°C = " + ConvertToFahrenheit(0) + "°F");
+
+            // Задача 60
+            Console.WriteLine("Задача 60: Максимум из (30, 20, 40) = " + FindMaximum(30, 20, 40));
+
+            // Задача 61
+            Console.WriteLine("Задача 61: НОД(72, 48) = " + GreatestCommonDivisor(72, 48));
+
+            // Задача 62
+            Console.WriteLine("Задача 62: Квадрат числа 11 = " + Square(11));
+
+            // Задача 63
+            Console.WriteLine("Задача 63: Гласные в 'Hello' = " + CountVowels("Hello"));
+
+            // Задача 64
+            Console.WriteLine("Задача 64: Длина 'Programming' = " + GetStringLength("Programming"));
+
+            // Задача 65
+            int[] unsorted1 = { 5, 3, 8, 1, 2 };
+            int[] sorted1 = SortArray(unsorted1);
+            Console.WriteLine("Задача 65: Отсортированный массив [5,3,8,1,2] = [" + string.Join(", ", sorted1) + "]");
+
+            // Задача 66
+            Console.WriteLine("Задача 66: 'A man a plan a canal Panama' палиндром? " + CheckPalindrome("A man a plan a canal Panama"));
+
+            // Задача 67
+            Console.WriteLine("Задача 67: Конкатенация 'C#' и 'Programming' = " + Concatenate("C#", "Programming"));
+
+            // Задача 68
+            Console.WriteLine("Задача 68: 'racecar' палиндром? " + IsStringPalindrome("racecar"));
+
+            // Задача 69
+            Console.WriteLine("Задача 69: 'level' палиндром? " + PalindromeCheck("level"));
+
+            // Задача 70
+            Console.WriteLine("Задача 70: Число 23 простое? " + CheckPrime(23));
+
+            // Задача 71
+            Console.WriteLine("Задача 71: Длина 'Test' = " + StringLength("Test"));
+
+            // Задача 72
+            Console.WriteLine("Задача 72: Максимум из (15, 25, 10) = " + MaximumOfThree(15, 25, 10));
+
+            // Задача 73
+            Console.WriteLine("Задача 73: Абсолютное значение -3.14 = " + Absolute(-3.14));
+
+            // Задача 74
+            Console.WriteLine("Задача 74: Конкатенация 'Hello' и 'C#' = " + JoinStrings("Hello", "C#"));
+
+            // Задача 75
+            Console.WriteLine("Задача 75: Реверс 'Reverse' = " + ReverseString("Reverse"));
+
+            // Задача 76
+            Console.WriteLine("Задача 76: НОД(84, 36) = " + CalculateGCD(84, 36));
+
+            // Задача 77
+            Console.WriteLine("Задача 77: Конкатенация 'Java' и 'Script' = " + CombineStrings("Java", "Script"));
+
+            // Задача 78
+            int[] toSort = { 9, 5, 7, 1, 3 };
+            SortArrayAscending(toSort);
+            Console.WriteLine("Задача 78: Отсортированный массив [9,5,7,1,3] = [" + string.Join(", ", toSort) + "]");
+
+            // Задача 79
+            Console.WriteLine("Задача 79: Гласные в 'Programming' = " + VowelCount("Programming"));
+
+            // Задача 80
+            Console.WriteLine("Задача 80: Длина 'String' = " + GetLength("String"));
+
+            // Задача 81
+            Console.WriteLine("Задача 81: Реверс 'Hello World' = " + StringReverse("Hello World"));
+
+            // Задача 82
+            Console.WriteLine("Задача 82: НОД(96, 64) = " + FindGCD(96, 64));
+
+            // Задача 83
+            Console.WriteLine("Задача 83: Площадь прямоугольника 8x6 = " + RectangleArea(8, 6));
+
+            // Задача 84
+            Console.WriteLine("Задача 84: Число 21 четное? " + CheckEven(21));
+
+            // Задача 85
+            Console.WriteLine("Задача 85: НОД(108, 72) = " + GCD_Recursive(108, 72));
+
+            // Задача 86
+            Console.WriteLine("Задача 86: Число 28 четное? " + IsNumberEven(28));
+
+            // Задача 87
+            Console.WriteLine("Задача 87: Площадь прямоугольника 10x5 = " + CalculateArea(10, 5));
+
+            // Задача 88
+            Console.WriteLine("Задача 88: Гласные в 'AEIOU' = " + CountVowelsInString("AEIOU"));
+
+            // Задача 89
+            Console.WriteLine("Задача 89: Длина 'Length' = " + MeasureString("Length"));
+
+            // Задача 90
+            Console.WriteLine("Задача 90: Максимум из (50, 30, 70) = " + GetMaxOfThree(50, 30, 70));
+
+            // Задача 91
+            Console.WriteLine("Задача 91: Число 29 простое? " + IsPrimeNumber(29));
+
+            // Задача 92
+            Console.WriteLine("Задача 92: Сумма массива [1,3,5,7,9] = " + SumOfArray(new int[] { 1, 3, 5, 7, 9 }));
+
+            // Задача 93
+            Console.WriteLine("Задача 93: Площадь прямоугольника 12x8 = " + ComputeRectangleArea(12, 8));
+
+            // Задача 94
+            Console.WriteLine("Задача 94: Число 31 простое? " + PrimeCheck(31));
+
+            // Задача 95
+            Console.WriteLine("Задача 95: Среднее массива [10,20,30] = " + ArrayAverage(new int[] { 10, 20, 30 }));
+
+            // Задача 96
+            Console.WriteLine("Задача 96: Гласные в 'Hello World' = " + CountVowelsText("Hello World"));
+
+            // Задача 97
+            int[] unsorted2 = { 6, 2, 8, 4, 1 };
+            int[] sorted2 = SortArrayBubble(unsorted2);
+            Console.WriteLine("Задача 97: Отсортированный массив [6,2,8,4,1] = [" + string.Join(", ", sorted2) + "]");
+
+            // Задача 98
+            Console.WriteLine("Задача 98:");
+            PrintMultiplicationTable(8);
+
+            // Задача 99
+            Console.WriteLine("Задача 99: Длина 'Programming' = " + TextLength("Programming"));
+
+            // Задача 100
+            Console.WriteLine("Задача 100:");
+            DisplayMultiplicationTable(9);
+        }
+    }
+}
