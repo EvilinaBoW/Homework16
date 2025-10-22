@@ -1,0 +1,1121 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp5
+{
+    public class Program
+    {
+        // Задача 201: Напишите перегруженные методы для вывода информации разных типов
+        static void PrintInfo(string message)
+        {
+            Console.WriteLine($"String: {message}");
+        }
+
+        static void PrintInfo(int number)
+        {
+            Console.WriteLine($"Int: {number}");
+        }
+
+        static void PrintInfo(double number)
+        {
+            Console.WriteLine($"Double: {number}");
+        }
+
+        static void PrintInfo(bool value)
+        {
+            Console.WriteLine($"Bool: {value}");
+        }
+
+        // Задача 202: Реализуйте перегрузку метода для вычисления площади (круг, прямоугольник)
+        static double CalculateArea(double radius)
+        {
+            return Math.PI * radius * radius;
+        }
+
+        static double CalculateArea(double length, double width)
+        {
+            return length * width;
+        }
+
+        // Задача 203: Реализуйте перегрузку метода для умножения (int, double, decimal)
+        static int Multiply(int a, int b)
+        {
+            return a * b;
+        }
+
+        static double Multiply(double a, double b)
+        {
+            return a * b;
+        }
+
+        static decimal Multiply(decimal a, decimal b)
+        {
+            return a * b;
+        }
+
+        // Задача 204: Напишите перегруженные методы для вывода информации разных типов
+        static void Display(object obj)
+        {
+            Console.WriteLine($"Object: {obj}");
+        }
+
+        static void Display(string str)
+        {
+            Console.WriteLine($"String: {str}");
+        }
+
+        static void Display(int num)
+        {
+            Console.WriteLine($"Integer: {num}");
+        }
+
+        static void Display(DateTime date)
+        {
+            Console.WriteLine($"DateTime: {date:yyyy-MM-dd}");
+        }
+
+        // Задача 205: Реализуйте перегрузку метода для вычисления площади (круг, прямоугольник)
+        static double GetArea(double radius) // круг
+        {
+            return Math.PI * Math.Pow(radius, 2);
+        }
+
+        static double GetArea(double length, double width) // прямоугольник
+        {
+            return length * width;
+        }
+
+        static double GetArea(double a, double b, double c) // треугольник по формуле Герона
+        {
+            double p = (a + b + c) / 2;
+            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+        }
+
+        // Задача 206: Реализуйте перегруженные методы для вычисления расстояния (2D, 3D точки)
+        static double CalculateDistance(double x1, double y1, double x2, double y2)
+        {
+            return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+        }
+
+        static double CalculateDistance(double x1, double y1, double z1, double x2, double y2, double z2)
+        {
+            return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2) + Math.Pow(z2 - z1, 2));
+        }
+
+        // Задача 207: Напишите перегруженные методы для вывода информации разных типов
+        static void Output(string text)
+        {
+            Console.WriteLine($"Текст: {text}");
+        }
+
+        static void Output(int number)
+        {
+            Console.WriteLine($"Целое число: {number}");
+        }
+
+        static void Output(double number)
+        {
+            Console.WriteLine($"Действительное число: {number:F2}");
+        }
+
+        static void Output(char character)
+        {
+            Console.WriteLine($"Символ: {character}");
+        }
+
+        // Задача 208: Реализуйте перегруженные методы для работы с коллекциями (добавление элементов)
+        static void AddToList(List<int> list, int item)
+        {
+            list.Add(item);
+        }
+
+        static void AddToList(List<string> list, string item)
+        {
+            list.Add(item);
+        }
+
+        static void AddToList(List<int> list, params int[] items)
+        {
+            list.AddRange(items);
+        }
+
+        // Задача 209: Реализуйте перегрузку метода для умножения (int, double, decimal)
+        static int MultiplyNumbers(int a, int b)
+        {
+            return a * b;
+        }
+
+        static double MultiplyNumbers(double a, double b)
+        {
+            return a * b;
+        }
+
+        static decimal MultiplyNumbers(decimal a, decimal b)
+        {
+            return a * b;
+        }
+
+        // Задача 210: Напишите перегруженные методы для форматирования даты разными способами
+        static string FormatDate(DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd");
+        }
+
+        static string FormatDate(DateTime date, string format)
+        {
+            return date.ToString(format);
+        }
+
+        static string FormatDate(int year, int month, int day)
+        {
+            return new DateTime(year, month, day).ToString("dd/MM/yyyy");
+        }
+
+        // Задача 211: Создайте перегрузку метода для вычисления скидки (процент, фиксированная сумма)
+        static double CalculateDiscount(double price, double discountPercent)
+        {
+            return price * (1 - discountPercent / 100);
+        }
+
+        static double CalculateDiscount(double price, decimal fixedDiscount)
+        {
+            return price - (double)fixedDiscount;
+        }
+
+        // Задача 212: Создайте перегруженные методы для работы с массивами разных типов
+        static void PrintArray(int[] array)
+        {
+            Console.WriteLine($"Int array: [{string.Join(", ", array)}]");
+        }
+
+        static void PrintArray(string[] array)
+        {
+            Console.WriteLine($"String array: [{string.Join(", ", array)}]");
+        }
+
+        static void PrintArray(double[] array)
+        {
+            Console.WriteLine($"Double array: [{string.Join(", ", array)}]");
+        }
+
+        // Задача 213: Напишите перегрузку метода для валидации данных (email, телефон, URL)
+        static bool Validate(string email)
+        {
+            return email.Contains("@") && email.Contains(".");
+        }
+
+        static bool Validate(string phone, bool isPhone)
+        {
+            return phone.Length >= 10 && phone.All(char.IsDigit);
+        }
+
+        static bool Validate(string url, string type)
+        {
+            return url.StartsWith("http://") || url.StartsWith("https://");
+        }
+
+        // Задача 214: Реализуйте перегруженные методы для конкатенации строк (2, 3, 4 строки)
+        static string Concatenate(string a, string b)
+        {
+            return a + b;
+        }
+
+        static string Concatenate(string a, string b, string c)
+        {
+            return a + b + c;
+        }
+
+        static string Concatenate(string a, string b, string c, string d)
+        {
+            return a + b + c + d;
+        }
+
+        // Задача 215: Создайте перегруженные методы для шифрования текста разными алгоритмами
+        static string Encrypt(string text) // простой шифр Цезаря
+        {
+            char[] chars = text.ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (char.IsLetter(chars[i]))
+                {
+                    chars[i] = (char)(chars[i] + 3);
+                }
+            }
+            return new string(chars);
+        }
+
+        static string Encrypt(string text, int shift) // шифр Цезаря с заданным сдвигом
+        {
+            char[] chars = text.ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (char.IsLetter(chars[i]))
+                {
+                    chars[i] = (char)(chars[i] + shift);
+                }
+            }
+            return new string(chars);
+        }
+
+        // Задача 216: Создайте перегруженные методы для шифрования текста разными алгоритмами
+        static string EncryptText(string text, string method)
+        {
+            if (method == "reverse")
+                return new string(text.Reverse().ToArray());
+            else if (method == "uppercase")
+                return text.ToUpper();
+            else
+                return text;
+        }
+
+        static string EncryptText(string text, int key)
+        {
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(text);
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                bytes[i] = (byte)(bytes[i] ^ key);
+            }
+            return Convert.ToBase64String(bytes);
+        }
+
+        // Задача 217: Создайте перегрузку метода для вычисления скидки (процент, фиксированная сумма)
+        static decimal ApplyDiscount(decimal price, decimal discountAmount)
+        {
+            return price - discountAmount;
+        }
+
+        static decimal ApplyDiscount(decimal price, int discountPercent)
+        {
+            return price * (100 - discountPercent) / 100;
+        }
+
+        // Задача 218: Реализуйте перегрузку метода для умножения (int, double, decimal)
+        static int MultiplyValues(int x, int y)
+        {
+            return x * y;
+        }
+
+        static double MultiplyValues(double x, double y)
+        {
+            return x * y;
+        }
+
+        static decimal MultiplyValues(decimal x, decimal y)
+        {
+            return x * y;
+        }
+
+        // Задача 219: Создайте перегрузку метода для вычисления скидки (процент, фиксированная сумма)
+        static double GetDiscountedPrice(double originalPrice, double percentOff)
+        {
+            return originalPrice * (1 - percentOff / 100);
+        }
+
+        static double GetDiscountedPrice(double originalPrice, int fixedDiscount)
+        {
+            return Math.Max(0, originalPrice - fixedDiscount);
+        }
+
+        // Задача 220: Реализуйте перегрузку метода для вычисления периметра разных фигур
+        static double CalculatePerimeter(double side) // квадрат
+        {
+            return 4 * side;
+        }
+
+        static double CalculatePerimeter(double length, double width) // прямоугольник
+        {
+            return 2 * (length + width);
+        }
+
+        static double CalculatePerimeter(double a, double b, double c) // треугольник
+        {
+            return a + b + c;
+        }
+
+        // Задача 221: Создайте перегруженные методы для работы с массивами разных типов
+        static int FindIndex(int[] array, int value)
+        {
+            return Array.IndexOf(array, value);
+        }
+
+        static int FindIndex(string[] array, string value)
+        {
+            return Array.IndexOf(array, value);
+        }
+
+        static int FindIndex(double[] array, double value)
+        {
+            return Array.IndexOf(array, value);
+        }
+
+        // Задача 222: Создайте перегрузку метода для поиска максимума (2, 3, 4 числа)
+        static int FindMax(int a, int b)
+        {
+            return Math.Max(a, b);
+        }
+
+        static int FindMax(int a, int b, int c)
+        {
+            return Math.Max(a, Math.Max(b, c));
+        }
+
+        static int FindMax(int a, int b, int c, int d)
+        {
+            return Math.Max(Math.Max(a, b), Math.Max(c, d));
+        }
+
+        // Задача 223: Создайте перегрузку метода для поиска максимума (2, 3, 4 числа)
+        static double Maximum(double x, double y)
+        {
+            return x > y ? x : y;
+        }
+
+        static double Maximum(double x, double y, double z)
+        {
+            return Math.Max(x, Math.Max(y, z));
+        }
+
+        static double Maximum(double a, double b, double c, double d)
+        {
+            return Math.Max(Math.Max(a, b), Math.Max(c, d));
+        }
+
+        // Задача 224: Реализуйте перегрузку метода для вычисления периметра разных фигур
+        static double ComputePerimeter(double radius) // круг
+        {
+            return 2 * Math.PI * radius;
+        }
+
+        static double ComputePerimeter(double side1, double side2) // прямоугольник
+        {
+            return 2 * (side1 + side2);
+        }
+
+        static double ComputePerimeter(double side1, double side2, double side3) // треугольник
+        {
+            return side1 + side2 + side3;
+        }
+
+        // Задача 225: Напишите перегрузку метода для преобразования температуры (Celsius, Fahrenheit, Kelvin)
+        static double ConvertTemperature(double celsius)
+        {
+            return celsius * 9 / 5 + 32; // в Fahrenheit
+        }
+
+        static double ConvertTemperature(double value, string from, string to)
+        {
+            if (from == "C" && to == "F")
+                return value * 9 / 5 + 32;
+            else if (from == "F" && to == "C")
+                return (value - 32) * 5 / 9;
+            else if (from == "C" && to == "K")
+                return value + 273.15;
+            else
+                return value;
+        }
+
+        // Задача 226: Реализуйте перегрузку метода для вычисления периметра разных фигур
+        static double Perimeter(double side) // квадрат
+        {
+            return 4 * side;
+        }
+
+        static double Perimeter(double length, double width) // прямоугольник
+        {
+            return 2 * (length + width);
+        }
+
+        static double Perimeter(params double[] sides) // многоугольник
+        {
+            return sides.Sum();
+        }
+
+        // Задача 227: Реализуйте перегрузку метода для вычисления периметра разных фигур
+        static double GetPerimeter(double radius) // окружность
+        {
+            return 2 * Math.PI * radius;
+        }
+
+        static double GetPerimeter(double a, double b) // прямоугольник
+        {
+            return 2 * (a + b);
+        }
+
+        static double GetPerimeter(double a, double b, double c, double d) // четырехугольник
+        {
+            return a + b + c + d;
+        }
+
+        // Задача 228: Напишите перегруженные методы для парсинга строк в числа разных типов
+        static int ParseToNumber(string input)
+        {
+            return int.Parse(input);
+        }
+
+        static double ParseToNumber(string input, bool asDouble)
+        {
+            return double.Parse(input);
+        }
+
+        static decimal ParseToNumber(string input, string asDecimal)
+        {
+            return decimal.Parse(input);
+        }
+
+        // Задача 229: Реализуйте перегрузку метода для вычисления площади (круг, прямоугольник)
+        static double Area(double radius)
+        {
+            return Math.PI * radius * radius;
+        }
+
+        static double Area(double length, double width)
+        {
+            return length * width;
+        }
+
+        static double Area(double baseLength, double height, bool isTriangle)
+        {
+            return 0.5 * baseLength * height;
+        }
+
+        // Задача 230: Создайте перегрузку метода для поиска максимума (2, 3, 4 числа)
+        static int Max(int a, int b)
+        {
+            return a >= b ? a : b;
+        }
+
+        static int Max(int a, int b, int c)
+        {
+            return Max(a, Max(b, c));
+        }
+
+        static int Max(int a, int b, int c, int d)
+        {
+            return Max(Max(a, b), Max(c, d));
+        }
+
+        // Задача 231: Реализуйте перегрузку метода для вычисления площади (круг, прямоугольник)
+        static double CalculateSurface(double radius)
+        {
+            return Math.PI * radius * radius;
+        }
+
+        static double CalculateSurface(double length, double width)
+        {
+            return length * width;
+        }
+
+        static double CalculateSurface(double a, double b, double height, bool isTrapezoid)
+        {
+            return 0.5 * (a + b) * height;
+        }
+
+        // Задача 232: Создайте перегруженные методы для сортировки (по возрастанию/убыванию)
+        static void SortArray(int[] array)
+        {
+            Array.Sort(array);
+        }
+
+        static void SortArray(int[] array, bool descending)
+        {
+            Array.Sort(array);
+            if (descending)
+                Array.Reverse(array);
+        }
+
+        // Задача 233: Реализуйте перегруженные методы для вычисления расстояния (2D, 3D точки)
+        static double Distance(double x1, double y1, double x2, double y2)
+        {
+            return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+        }
+
+        static double Distance(double x1, double y1, double z1, double x2, double y2, double z2)
+        {
+            return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2) + Math.Pow(z2 - z1, 2));
+        }
+
+        // Задача 234: Создайте перегрузку метода для поиска максимума (2, 3, 4 числа)
+        static double FindMaximum(double x, double y)
+        {
+            return Math.Max(x, y);
+        }
+
+        static double FindMaximum(double x, double y, double z)
+        {
+            return Math.Max(x, Math.Max(y, z));
+        }
+
+        static double FindMaximum(double a, double b, double c, double d)
+        {
+            return Math.Max(Math.Max(a, b), Math.Max(c, d));
+        }
+
+        // Задача 235: Реализуйте перегрузку метода для умножения (int, double, decimal)
+        static int Multiply(int a, int b, int c)
+        {
+            return a * b * c;
+        }
+
+        static double Multiply(double a, double b)
+        {
+            return a * b;
+        }
+
+        static decimal Multiply(decimal a, decimal b, decimal c)
+        {
+            return a * b * c;
+        }
+
+        // Задача 236: Создайте перегруженные методы для работы с массивами разных типов
+        static void InitializeArray(int[] array, int value)
+        {
+            for (int i = 0; i < array.Length; i++)
+                array[i] = value;
+        }
+
+        static void InitializeArray(double[] array, double value)
+        {
+            for (int i = 0; i < array.Length; i++)
+                array[i] = value;
+        }
+
+        static void InitializeArray(bool[] array, bool value)
+        {
+            for (int i = 0; i < array.Length; i++)
+                array[i] = value;
+        }
+
+        // Задача 237: Создайте перегруженные методы для работы с массивами разных типов
+        static T[] CreateArray<T>(T value, int length)
+        {
+            T[] array = new T[length];
+            for (int i = 0; i < length; i++)
+                array[i] = value;
+            return array;
+        }
+
+        static int[] CreateArray(int start, int count)
+        {
+            int[] array = new int[count];
+            for (int i = 0; i < count; i++)
+                array[i] = start + i;
+            return array;
+        }
+
+        // Задача 238: Напишите перегрузку метода для валидации данных (email, телефон, URL)
+        static bool IsValid(string input, string type)
+        {
+            switch (type)
+            {
+                case "email":
+                    return input.Contains("@") && input.Contains(".") && input.Length > 5;
+                case "phone":
+                    return input.All(char.IsDigit) && input.Length >= 10;
+                case "url":
+                    return input.StartsWith("http");
+                default:
+                    return false;
+            }
+        }
+
+        // Задача 239: Напишите перегруженные методы для парсинга строк в числа разных типов
+        static int ParseValue(string str)
+        {
+            return int.Parse(str);
+        }
+
+        static long ParseValue(string str, bool asLong)
+        {
+            return long.Parse(str);
+        }
+
+        static double ParseValue(string str, string asDouble)
+        {
+            return double.Parse(str);
+        }
+
+        // Задача 240: Реализуйте перегруженные методы для конкатенации строк (2, 3, 4 строки)
+        static string Combine(string str1, string str2)
+        {
+            return string.Concat(str1, str2);
+        }
+
+        static string Combine(string str1, string str2, string str3)
+        {
+            return string.Concat(str1, str2, str3);
+        }
+
+        static string Combine(string str1, string str2, string str3, string str4)
+        {
+            return string.Concat(str1, str2, str3, str4);
+        }
+
+        // Задача 241: Реализуйте перегрузку метода для вычисления периметра разных фигур
+        static double CalcPerimeter(double sideLength)
+        {
+            return 4 * sideLength;
+        }
+
+        static double CalcPerimeter(double length, double width)
+        {
+            return 2 * (length + width);
+        }
+
+        static double CalcPerimeter(double sideA, double sideB, double sideC)
+        {
+            return sideA + sideB + sideC;
+        }
+
+        // Задача 242: Напишите перегрузку метода для вычисления объема (куб, параллелепипед, цилиндр)
+        static double CalculateVolume(double side) // куб
+        {
+            return Math.Pow(side, 3);
+        }
+
+        static double CalculateVolume(double length, double width, double height) // параллелепипед
+        {
+            return length * width * height;
+        }
+
+        static double CalculateVolume(double radius, double height) // цилиндр
+        {
+            return Math.PI * Math.Pow(radius, 2) * height;
+        }
+
+        // Задача 243: Напишите перегруженные методы для форматирования даты разными способами
+        static string Format(DateTime date)
+        {
+            return date.ToString("dd.MM.yyyy");
+        }
+
+        static string Format(DateTime date, bool withTime)
+        {
+            return withTime ? date.ToString("dd.MM.yyyy HH:mm") : Format(date);
+        }
+
+        static string Format(int day, int month, int year)
+        {
+            return new DateTime(year, month, day).ToString("yyyy-MM-dd");
+        }
+
+        // Задача 244: Напишите перегруженные методы для парсинга строк в числа разных типов
+        static int ParseInput(string input)
+        {
+            return int.Parse(input);
+        }
+
+        static float ParseInput(string input, bool asFloat)
+        {
+            return float.Parse(input);
+        }
+
+        static decimal ParseInput(string input, string asDecimal)
+        {
+            return decimal.Parse(input);
+        }
+
+        // Задача 245: Реализуйте перегрузку метода для умножения (int, double, decimal)
+        static int Product(int a, int b)
+        {
+            return a * b;
+        }
+
+        static double Product(double a, double b)
+        {
+            return a * b;
+        }
+
+        static decimal Product(decimal a, decimal b)
+        {
+            return a * b;
+        }
+
+        // Задача 246: Напишите перегруженные методы для вывода информации разных типов
+        static void Show(string message)
+        {
+            Console.WriteLine($"Сообщение: {message}");
+        }
+
+        static void Show(int number)
+        {
+            Console.WriteLine($"Число: {number}");
+        }
+
+        static void Show(double number)
+        {
+            Console.WriteLine($"Дробное число: {number}");
+        }
+
+        static void Show(DateTime date)
+        {
+            Console.WriteLine($"Дата: {date:dd.MM.yyyy}");
+        }
+
+        // Задача 247: Напишите перегруженные методы для парсинга строк в числа разных типов
+        static short ConvertToShort(string value)
+        {
+            return short.Parse(value);
+        }
+
+        static int ConvertToInt(string value)
+        {
+            return int.Parse(value);
+        }
+
+        static long ConvertToLong(string value)
+        {
+            return long.Parse(value);
+        }
+
+        // Задача 248: Напишите перегрузку метода для валидации данных (email, телефон, URL)
+        static bool CheckValidity(string data)
+        {
+            // базовая проверка на пустоту
+            return !string.IsNullOrEmpty(data);
+        }
+
+        static bool CheckValidity(string email, string type)
+        {
+            if (type == "email")
+                return email.Contains("@") && email.Length > 5;
+            else if (type == "phone")
+                return data.All(char.IsDigit) && data.Length >= 7;
+            else
+                return false;
+        }
+
+        // Задача 249: Создайте перегрузку метода для поиска максимума (2, 3, 4 числа)
+        static int GetMax(int a, int b)
+        {
+            return a > b ? a : b;
+        }
+
+        static int GetMax(int a, int b, int c)
+        {
+            return GetMax(GetMax(a, b), c);
+        }
+
+        static int GetMax(int a, int b, int c, int d)
+        {
+            return GetMax(GetMax(a, b), GetMax(c, d));
+        }
+
+        // Задача 250: Реализуйте перегрузку метода для вычисления площади (круг, прямоугольник)
+        static double ComputeArea(double radius)
+        {
+            return Math.PI * radius * radius;
+        }
+
+        static double ComputeArea(double length, double width)
+        {
+            return length * width;
+        }
+
+        static double ComputeArea(double baseLength, double height)
+        {
+            return 0.5 * baseLength * height;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== ДЕМОНСТРАЦИЯ ПЕРЕГРУЗКИ МЕТОДОВ (201-250) ===\n");
+
+            // Задача 201
+            Console.WriteLine("Задача 201:");
+            PrintInfo("Hello World");
+            PrintInfo(42);
+            PrintInfo(3.14);
+            PrintInfo(true);
+
+            // Задача 202
+            Console.WriteLine("\nЗадача 202:");
+            Console.WriteLine($"Площадь круга (r=5): {CalculateArea(5):F2}");
+            Console.WriteLine($"Площадь прямоугольника (5x10): {CalculateArea(5, 10)}");
+
+            // Задача 203
+            Console.WriteLine("\nЗадача 203:");
+            Console.WriteLine($"Умножение int: {Multiply(3, 4)}");
+            Console.WriteLine($"Умножение double: {Multiply(2.5, 4.0)}");
+            Console.WriteLine($"Умножение decimal: {Multiply(1.5m, 2.0m)}");
+
+            // Задача 204
+            Console.WriteLine("\nЗадача 204:");
+            Display("Test String");
+            Display(100);
+            Display(DateTime.Now);
+
+            // Задача 205
+            Console.WriteLine("\nЗадача 205:");
+            Console.WriteLine($"Площадь круга: {GetArea(3):F2}");
+            Console.WriteLine($"Площадь прямоугольника: {GetArea(4, 5)}");
+            Console.WriteLine($"Площадь треугольника: {GetArea(3, 4, 5):F2}");
+
+            // Задача 206
+            Console.WriteLine("\nЗадача 206:");
+            Console.WriteLine($"2D расстояние: {CalculateDistance(0, 0, 3, 4):F2}");
+            Console.WriteLine($"3D расстояние: {CalculateDistance(0, 0, 0, 3, 4, 5):F2}");
+
+            // Задача 207
+            Console.WriteLine("\nЗадача 207:");
+            Output("Пример текста");
+            Output(123);
+            Output(45.678);
+            Output('A');
+
+            // Задача 208
+            Console.WriteLine("\nЗадача 208:");
+            List<int> intList = new List<int>();
+            AddToList(intList, 1);
+            AddToList(intList, 2, 3, 4);
+            Console.WriteLine($"Int list: [{string.Join(", ", intList)}]");
+
+            // Задача 209
+            Console.WriteLine("\nЗадача 209:");
+            Console.WriteLine($"Int умножение: {MultiplyNumbers(5, 6)}");
+            Console.WriteLine($"Double умножение: {MultiplyNumbers(2.5, 3.0)}");
+            Console.WriteLine($"Decimal умножение: {MultiplyNumbers(1.2m, 1.5m)}");
+
+            // Задача 210
+            Console.WriteLine("\nЗадача 210:");
+            DateTime now = DateTime.Now;
+            Console.WriteLine($"Формат по умолчанию: {FormatDate(now)}");
+            Console.WriteLine($"Произвольный формат: {FormatDate(now, "dd/MM/yyyy HH:mm")}");
+            Console.WriteLine($"Из компонентов: {FormatDate(2023, 12, 25)}");
+
+            // Задача 211
+            Console.WriteLine("\nЗадача 211:");
+            Console.WriteLine($"Скидка 20% от 1000: {CalculateDiscount(1000, 20):C}");
+            Console.WriteLine($"Фиксированная скидка 150 от 1000: {CalculateDiscount(1000, 150m):C}");
+
+            // Задача 212
+            Console.WriteLine("\nЗадача 212:");
+            PrintArray(new int[] { 1, 2, 3 });
+            PrintArray(new string[] { "a", "b", "c" });
+            PrintArray(new double[] { 1.1, 2.2, 3.3 });
+
+            // Задача 213
+            Console.WriteLine("\nЗадача 213:");
+            Console.WriteLine($"Email valid: {Validate("test@example.com")}");
+            Console.WriteLine($"Phone valid: {Validate("1234567890", true)}");
+            Console.WriteLine($"URL valid: {Validate("https://example.com", "url")}");
+
+            // Задача 214
+            Console.WriteLine("\nЗадача 214:");
+            Console.WriteLine($"2 строки: {Concatenate("Hello", "World")}");
+            Console.WriteLine($"3 строки: {Concatenate("C#", " ", "Programming")}");
+            Console.WriteLine($"4 строки: {Concatenate("This", " ", "is", " test")}");
+
+            // Задача 215
+            Console.WriteLine("\nЗадача 215:");
+            Console.WriteLine($"Шифр Цезаря (сдвиг 3): {Encrypt("abc")}");
+            Console.WriteLine($"Шифр Цезаря (сдвиг 5): {Encrypt("hello", 5)}");
+
+            // Задача 216
+            Console.WriteLine("\nЗадача 216:");
+            Console.WriteLine($"Reverse шифр: {EncryptText("hello", "reverse")}");
+            Console.WriteLine($"XOR шифр: {EncryptText("test", 42)}");
+
+            // Задача 217
+            Console.WriteLine("\nЗадача 217:");
+            Console.WriteLine($"Фиксированная скидка: {ApplyDiscount(1000m, 100m):C}");
+            Console.WriteLine($"Процентная скидка: {ApplyDiscount(1000m, 20):C}");
+
+            // Задача 218
+            Console.WriteLine("\nЗадача 218:");
+            Console.WriteLine($"Int: {MultiplyValues(2, 3)}");
+            Console.WriteLine($"Double: {MultiplyValues(2.5, 3.0)}");
+            Console.WriteLine($"Decimal: {MultiplyValues(1.5m, 2.0m)}");
+
+            // Задача 219
+            Console.WriteLine("\nЗадача 219:");
+            Console.WriteLine($"20% скидка от 500: {GetDiscountedPrice(500, 20):C}");
+            Console.WriteLine($"Фиксированная скидка 50 от 500: {GetDiscountedPrice(500, 50):C}");
+
+            // Задача 220
+            Console.WriteLine("\nЗадача 220:");
+            Console.WriteLine($"Периметр квадрата: {CalculatePerimeter(5)}");
+            Console.WriteLine($"Периметр прямоугольника: {CalculatePerimeter(4, 6)}");
+            Console.WriteLine($"Периметр треугольника: {CalculatePerimeter(3, 4, 5)}");
+
+            // Задача 221
+            Console.WriteLine("\nЗадача 221:");
+            Console.WriteLine($"Index in int array: {FindIndex(new int[] { 1, 2, 3 }, 2)}");
+            Console.WriteLine($"Index in string array: {FindIndex(new string[] { "a", "b", "c" }, "b")}");
+
+            // Задача 222
+            Console.WriteLine("\nЗадача 222:");
+            Console.WriteLine($"Максимум из 2: {FindMax(10, 20)}");
+            Console.WriteLine($"Максимум из 3: {FindMax(10, 30, 20)}");
+            Console.WriteLine($"Максимум из 4: {FindMax(10, 40, 30, 20)}");
+
+            // Задача 223
+            Console.WriteLine("\nЗадача 223:");
+            Console.WriteLine($"Max of 2: {Maximum(1.5, 2.5)}");
+            Console.WriteLine($"Max of 3: {Maximum(1.1, 2.2, 1.5)}");
+            Console.WriteLine($"Max of 4: {Maximum(1.0, 2.0, 3.0, 2.5)}");
+
+            // Задача 224
+            Console.WriteLine("\nЗадача 224:");
+            Console.WriteLine($"Периметр круга: {ComputePerimeter(3):F2}");
+            Console.WriteLine($"Периметр прямоугольника: {ComputePerimeter(4, 5)}");
+            Console.WriteLine($"Периметр треугольника: {ComputePerimeter(3, 4, 5)}");
+
+            // Задача 225
+            Console.WriteLine("\nЗадача 225:");
+            Console.WriteLine($"25°C в Fahrenheit: {ConvertTemperature(25):F1}");
+            Console.WriteLine($"25°C в Kelvin: {ConvertTemperature(25, "C", "K"):F2}");
+
+            // Задача 226
+            Console.WriteLine("\nЗадача 226:");
+            Console.WriteLine($"Периметр квадрата: {Perimeter(5)}");
+            Console.WriteLine($"Периметр прямоугольника: {Perimeter(4, 6)}");
+            Console.WriteLine($"Периметр многоугольника: {Perimeter(1, 2, 3, 4, 5)}");
+
+            // Задача 227
+            Console.WriteLine("\nЗадача 227:");
+            Console.WriteLine($"Периметр окружности: {GetPerimeter(5):F2}");
+            Console.WriteLine($"Периметр прямоугольника: {GetPerimeter(4, 6)}");
+            Console.WriteLine($"Периметр четырехугольника: {GetPerimeter(2, 3, 4, 5)}");
+
+            // Задача 228
+            Console.WriteLine("\nЗадача 228:");
+            Console.WriteLine($"Parse to int: {ParseToNumber("123")}");
+            Console.WriteLine($"Parse to double: {ParseToNumber("123.45", true)}");
+            Console.WriteLine($"Parse to decimal: {ParseToNumber("123.45", "decimal")}");
+
+            // Задача 229
+            Console.WriteLine("\nЗадача 229:");
+            Console.WriteLine($"Площадь круга: {Area(3):F2}");
+            Console.WriteLine($"Площадь прямоугольника: {Area(4, 5)}");
+            Console.WriteLine($"Площадь треугольника: {Area(6, 4, true)}");
+
+            // Задача 230
+            Console.WriteLine("\nЗадача 230:");
+            Console.WriteLine($"Max of 2: {Max(15, 25)}");
+            Console.WriteLine($"Max of 3: {Max(15, 35, 25)}");
+            Console.WriteLine($"Max of 4: {Max(15, 45, 35, 25)}");
+
+            // Задача 231
+            Console.WriteLine("\nЗадача 231:");
+            Console.WriteLine($"Площадь круга: {CalculateSurface(3):F2}");
+            Console.WriteLine($"Площадь прямоугольника: {CalculateSurface(4, 5)}");
+            Console.WriteLine($"Площадь трапеции: {CalculateSurface(3, 5, 4, true)}");
+
+            // Задача 232
+            Console.WriteLine("\nЗадача 232:");
+            int[] arr = { 3, 1, 4, 2 };
+            SortArray(arr);
+            Console.WriteLine($"По возрастанию: [{string.Join(", ", arr)}]");
+            SortArray(arr, true);
+            Console.WriteLine($"По убыванию: [{string.Join(", ", arr)}]");
+
+            // Задача 233
+            Console.WriteLine("\nЗадача 233:");
+            Console.WriteLine($"2D расстояние: {Distance(0, 0, 3, 4):F2}");
+            Console.WriteLine($"3D расстояние: {Distance(0, 0, 0, 3, 4, 5):F2}");
+
+            // Задача 234
+            Console.WriteLine("\nЗадача 234:");
+            Console.WriteLine($"Max of 2: {FindMaximum(2.2, 3.3)}");
+            Console.WriteLine($"Max of 3: {FindMaximum(2.2, 4.4, 3.3)}");
+            Console.WriteLine($"Max of 4: {FindMaximum(2.2, 5.5, 4.4, 3.3)}");
+
+            // Задача 235
+            Console.WriteLine("\nЗадача 235:");
+            Console.WriteLine($"Int умножение 3 чисел: {Multiply(2, 3, 4)}");
+            Console.WriteLine($"Double умножение: {Multiply(2.5, 3.0)}");
+            Console.WriteLine($"Decimal умножение 3 чисел: {Multiply(1.5m, 2.0m, 1.2m)}");
+
+            // Задача 236
+            Console.WriteLine("\nЗадача 236:");
+            int[] intArr = new int[3];
+            InitializeArray(intArr, 5);
+            Console.WriteLine($"Int array: [{string.Join(", ", intArr)}]");
+
+            // Задача 237
+            Console.WriteLine("\nЗадача 237:");
+            Console.WriteLine($"String array: [{string.Join(", ", CreateArray("test", 3))}]");
+            Console.WriteLine($"Int sequence: [{string.Join(", ", CreateArray(1, 5))}]");
+
+            // Задача 238
+            Console.WriteLine("\nЗадача 238:");
+            Console.WriteLine($"Email valid: {IsValid("test@example.com", "email")}");
+            Console.WriteLine($"Phone valid: {IsValid("1234567890", "phone")}");
+
+            // Задача 239
+            Console.WriteLine("\nЗадача 239:");
+            Console.WriteLine($"Parse to int: {ParseValue("123")}");
+            Console.WriteLine($"Parse to long: {ParseValue("123456789", true)}");
+            Console.WriteLine($"Parse to double: {ParseValue("123.45", "double")}");
+
+            // Задача 240
+            Console.WriteLine("\nЗадача 240:");
+            Console.WriteLine($"2 строки: {Combine("Hello", "World")}");
+            Console.WriteLine($"3 строки: {Combine("One", "Two", "Three")}");
+            Console.WriteLine($"4 строки: {Combine("A", "B", "C", "D")}");
+
+            // Задача 241
+            Console.WriteLine("\nЗадача 241:");
+            Console.WriteLine($"Периметр квадрата: {CalcPerimeter(5)}");
+            Console.WriteLine($"Периметр прямоугольника: {CalcPerimeter(4, 6)}");
+            Console.WriteLine($"Периметр треугольника: {CalcPerimeter(3, 4, 5)}");
+
+            // Задача 242
+            Console.WriteLine("\nЗадача 242:");
+            Console.WriteLine($"Объем куба: {CalculateVolume(3):F2}");
+            Console.WriteLine($"Объем параллелепипеда: {CalculateVolume(3, 4, 5)}");
+            Console.WriteLine($"Объем цилиндра: {CalculateVolume(2, 5):F2}");
+
+            // Задача 243
+            Console.WriteLine("\nЗадача 243:");
+            Console.WriteLine($"Формат по умолчанию: {Format(DateTime.Now)}");
+            Console.WriteLine($"С временем: {Format(DateTime.Now, true)}");
+            Console.WriteLine($"Из компонентов: {Format(25, 12, 2023)}");
+
+            // Задача 244
+            Console.WriteLine("\nЗадача 244:");
+            Console.WriteLine($"To int: {ParseInput("123")}");
+            Console.WriteLine($"To float: {ParseInput("123.45", true)}");
+            Console.WriteLine($"To decimal: {ParseInput("123.45", "decimal")}");
+
+            // Задача 245
+            Console.WriteLine("\nЗадача 245:");
+            Console.WriteLine($"Int product: {Product(3, 4)}");
+            Console.WriteLine($"Double product: {Product(2.5, 3.0)}");
+            Console.WriteLine($"Decimal product: {Product(1.5m, 2.0m)}");
+
+            // Задача 246
+            Console.WriteLine("\nЗадача 246:");
+            Show("Пример текста");
+            Show(999);
+            Show(3.14159);
+            Show(DateTime.Now);
+
+            // Задача 247
+            Console.WriteLine("\nЗадача 247:");
+            Console.WriteLine($"To short: {ConvertToShort("123")}");
+            Console.WriteLine($"To int: {ConvertToInt("12345")}");
+            Console.WriteLine($"To long: {ConvertToLong("123456789")}");
+
+            // Задача 248
+            Console.WriteLine("\nЗадача 248:");
+            Console.WriteLine($"Basic validation: {CheckValidity("test")}");
+            Console.WriteLine($"Email validation: {CheckValidity("user@example.com", "email")}");
+
+            // Задача 249
+            Console.WriteLine("\nЗадача 249:");
+            Console.WriteLine($"Max of 2: {GetMax(10, 20)}");
+            Console.WriteLine($"Max of 3: {GetMax(10, 30, 20)}");
+            Console.WriteLine($"Max of 4: {GetMax(10, 40, 30, 20)}");
+
+            // Задача 250
+            Console.WriteLine("\nЗадача 250:");
+            Console.WriteLine($"Площадь круга: {ComputeArea(3):F2}");
+            Console.WriteLine($"Площадь прямоугольника: {ComputeArea(4, 5)}");
+            Console.WriteLine($"Площадь треугольника: {ComputeArea(6, 4)}");
+        }
+    }
+}
