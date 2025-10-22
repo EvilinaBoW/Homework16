@@ -1,0 +1,682 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp5
+{
+    public class Program
+    {
+        // Задача 301: Реализуйте метод с именованными параметрами для построения SQL-запроса
+        static string BuildSQLQuery(string table, string columns = "*", string where = "", string orderBy = "")
+        {
+            string query = $"SELECT {columns} FROM {table}";
+            if (!string.IsNullOrEmpty(where))
+                query += $" WHERE {where}";
+            if (!string.IsNullOrEmpty(orderBy))
+                query += $" ORDER BY {orderBy}";
+            return query;
+        }
+
+        // Задача 302: Реализуйте метод с именованными параметрами для создания пользователя
+        static string CreateUser(string username, string email = "", string phone = "", bool isActive = true)
+        {
+            return $"User created: {username}, Email: {email}, Phone: {phone}, Active: {isActive}";
+        }
+
+        // Задача 303: Реализуйте метод с именованными параметрами для построения SQL-запроса
+        static string GenerateSQL(string tableName, string selectColumns = "*", string whereClause = "", int limit = 0)
+        {
+            string sql = $"SELECT {selectColumns} FROM {tableName}";
+            if (!string.IsNullOrEmpty(whereClause))
+                sql += $" WHERE {whereClause}";
+            if (limit > 0)
+                sql += $" LIMIT {limit}";
+            return sql;
+        }
+
+        // Задача 304: Напишите метод с опциональными параметрами для форматирования строки
+        static string FormatString(string text, bool toUpper = false, bool trim = true, string prefix = "")
+        {
+            string result = text;
+            if (trim)
+                result = result.Trim();
+            if (toUpper)
+                result = result.ToUpper();
+            if (!string.IsNullOrEmpty(prefix))
+                result = prefix + result;
+            return result;
+        }
+
+        // Задача 305: Реализуйте метод с именованными параметрами для создания графика
+        static string CreateChart(int width = 800, int height = 600, string color = "blue", string title = "")
+        {
+            return $"Chart: {width}x{height}, Color: {color}, Title: {title}";
+        }
+
+        // Задача 306: Создайте метод с опциональными параметрами для генерации пароля
+        static string GeneratePassword(int length = 8, bool includeNumbers = true, bool includeSpecial = false)
+        {
+            string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (includeNumbers)
+                chars += "0123456789";
+            if (includeSpecial)
+                chars += "!@#$%^&*";
+
+            Random random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        // Задача 307: Создайте метод с опциональными параметрами для генерации пароля
+        static string CreatePassword(int length = 10, bool useUppercase = true, bool useDigits = true)
+        {
+            string lower = "abcdefghijklmnopqrstuvwxyz";
+            string upper = useUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "";
+            string digits = useDigits ? "0123456789" : "";
+
+            string allChars = lower + upper + digits;
+            if (string.IsNullOrEmpty(allChars))
+                allChars = lower;
+
+            Random rand = new Random();
+            return new string(Enumerable.Repeat(allChars, length)
+                .Select(s => s[rand.Next(s.Length)]).ToArray());
+        }
+
+        // Задача 308: Реализуйте метод с опциональным параметром для округления чисел
+        static double RoundNumber(double number, int decimals = 2)
+        {
+            return Math.Round(number, decimals);
+        }
+
+        // Задача 309: Реализуйте метод с опциональными параметрами для создания файла
+        static string CreateFile(string fileName, string extension = "txt", string path = "")
+        {
+            string fullPath = string.IsNullOrEmpty(path) ? fileName : $"{path}/{fileName}";
+            return $"{fullPath}.{extension}";
+        }
+
+        // Задача 310: Напишите метод с опциональным параметром для поиска в массиве
+        static int FindInArray(int[] array, int value, int startIndex = 0)
+        {
+            for (int i = startIndex; i < array.Length; i++)
+            {
+                if (array[i] == value)
+                    return i;
+            }
+            return -1;
+        }
+
+        // Задача 311: Создайте метод с опциональными параметрами для подключения к базе данных
+        static string ConnectToDatabase(string server, string database, string username = "sa", string password = "", int timeout = 30)
+        {
+            return $"Connected to {server}/{database} as {username} (timeout: {timeout}s)";
+        }
+
+        // Задача 312: Реализуйте метод с опциональными параметрами для создания файла
+        static string MakeFilePath(string name, string folder = "documents", string ext = "pdf")
+        {
+            return $"{folder}/{name}.{ext}";
+        }
+
+        // Задача 313: Реализуйте метод с именованными параметрами для настройки логирования
+        static string SetupLogging(string logLevel = "INFO", string outputFile = "app.log", bool enableConsole = true)
+        {
+            return $"Logging: Level={logLevel}, File={outputFile}, Console={enableConsole}";
+        }
+
+        // Задача 314: Напишите метод с опциональным параметром для поиска в массиве
+        static int SearchArray(string[] array, string target, int fromIndex = 0)
+        {
+            for (int i = fromIndex; i < array.Length; i++)
+            {
+                if (array[i] == target)
+                    return i;
+            }
+            return -1;
+        }
+
+        // Задача 315: Создайте метод с опциональным параметром для пагинации
+        static string GetPageData(int page = 1, int pageSize = 10)
+        {
+            int skip = (page - 1) * pageSize;
+            return $"Page {page}: Skip {skip}, Take {pageSize}";
+        }
+
+        // Задача 316: Реализуйте метод с опциональным параметром для вывода сообщения с префиксом
+        static void PrintMessage(string message, string prefix = "INFO")
+        {
+            Console.WriteLine($"[{prefix}] {message}");
+        }
+
+        // Задача 317: Создайте метод с именованными параметрами для отправки email
+        static string SendEmail(string to, string subject = "No Subject", string body = "", bool hasAttachment = false)
+        {
+            return $"To: {to}, Subject: {subject}, Body: {body}, Attachment: {hasAttachment}";
+        }
+
+        // Задача 318: Напишите метод с опциональными параметрами для валидации формы
+        static bool ValidateForm(string username, string password, bool checkEmail = false, bool checkPhone = false)
+        {
+            bool isValid = !string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password);
+            if (checkEmail)
+                isValid = isValid && username.Contains("@");
+            return isValid;
+        }
+
+        // Задача 319: Реализуйте метод с опциональными параметрами для создания файла
+        static string BuildFileName(string baseName, string directory = "files", string fileExtension = "txt")
+        {
+            return $"{directory}/{baseName}.{fileExtension}";
+        }
+
+        // Задача 320: Напишите метод с опциональными параметрами для форматирования строки
+        static string FormatText(string input, bool capitalize = false, int maxLength = 0)
+        {
+            string result = input;
+            if (capitalize)
+                result = result.ToUpper();
+            if (maxLength > 0 && result.Length > maxLength)
+                result = result.Substring(0, maxLength) + "...";
+            return result;
+        }
+
+        // Задача 321: Создайте метод с опциональным параметром для вычисления степени числа
+        static double Power(double number, int exponent = 2)
+        {
+            return Math.Pow(number, exponent);
+        }
+
+        // Задача 322: Напишите метод с опциональными параметрами для валидации формы
+        static bool ValidateUserInput(string input, int minLength = 1, int maxLength = 100, bool allowSpecialChars = true)
+        {
+            if (string.IsNullOrEmpty(input) || input.Length < minLength || input.Length > maxLength)
+                return false;
+            if (!allowSpecialChars && input.Any(ch => !char.IsLetterOrDigit(ch)))
+                return false;
+            return true;
+        }
+
+        // Задача 323: Реализуйте метод с именованными параметрами для построения SQL-запроса
+        static string ConstructSQL(string fromTable, string selectFields = "*", string whereCondition = "", string groupBy = "")
+        {
+            string sql = $"SELECT {selectFields} FROM {fromTable}";
+            if (!string.IsNullOrEmpty(whereCondition))
+                sql += $" WHERE {whereCondition}";
+            if (!string.IsNullOrEmpty(groupBy))
+                sql += $" GROUP BY {groupBy}";
+            return sql;
+        }
+
+        // Задача 324: Создайте метод с опциональными параметрами для генерации пароля
+        static string GenerateSecurePassword(int length = 12, bool includeUppercase = true, bool includeNumbers = true, bool includeSymbols = true)
+        {
+            string lower = "abcdefghijklmnopqrstuvwxyz";
+            string upper = includeUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "";
+            string numbers = includeNumbers ? "0123456789" : "";
+            string symbols = includeSymbols ? "!@#$%^&*" : "";
+
+            string allChars = lower + upper + numbers + symbols;
+            Random random = new Random();
+            return new string(Enumerable.Repeat(allChars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        // Задача 325: Создайте метод с именованными параметрами для расчета стоимости заказа
+        static decimal CalculateOrder(decimal basePrice, decimal taxRate = 0.1m, decimal discount = 0m, decimal shipping = 5m)
+        {
+            return basePrice * (1 + taxRate) - discount + shipping;
+        }
+
+        // Задача 326: Напишите метод с опциональными параметрами для форматирования строки
+        static string ProcessString(string text, bool reverse = false, bool removeSpaces = false)
+        {
+            string result = text;
+            if (removeSpaces)
+                result = result.Replace(" ", "");
+            if (reverse)
+                result = new string(result.Reverse().ToArray());
+            return result;
+        }
+
+        // Задача 327: Напишите метод с именованными параметрами для создания конфигурации приложения
+        static string CreateAppConfig(string appName, string version = "1.0", bool debugMode = false, string environment = "production")
+        {
+            return $"App: {appName}, Version: {version}, Debug: {debugMode}, Env: {environment}";
+        }
+
+        // Задача 328: Создайте метод с опциональными параметрами для подключения к базе данных
+        static string DatabaseConnection(string host, string dbName, int port = 5432, string user = "admin")
+        {
+            return $"Host: {host}:{port}, Database: {dbName}, User: {user}";
+        }
+
+        // Задача 329: Реализуйте метод с опциональным параметром для округления чисел
+        static decimal RoundDecimal(decimal value, int decimalPlaces = 2)
+        {
+            return Math.Round(value, decimalPlaces);
+        }
+
+        // Задача 330: Напишите метод с опциональным параметром для поиска в массиве
+        static int ArraySearch(double[] array, double target, int startFrom = 0)
+        {
+            for (int i = startFrom; i < array.Length; i++)
+            {
+                if (Math.Abs(array[i] - target) < 0.0001)
+                    return i;
+            }
+            return -1;
+        }
+
+        // Задача 331: Реализуйте метод с опциональным параметром для вывода сообщения с префиксом
+        static void DisplayMessage(string content, string type = "LOG")
+        {
+            Console.WriteLine($"[{type}] {DateTime.Now:HH:mm:ss} - {content}");
+        }
+
+        // Задача 332: Напишите метод с именованными параметрами для фильтрации данных
+        static string FilterData(string source, string filterBy = "", string sortBy = "", int limit = 100)
+        {
+            string result = $"Data from: {source}";
+            if (!string.IsNullOrEmpty(filterBy))
+                result += $", Filter: {filterBy}";
+            if (!string.IsNullOrEmpty(sortBy))
+                result += $", Sort: {sortBy}";
+            result += $", Limit: {limit}";
+            return result;
+        }
+
+        // Задача 333: Напишите метод с опциональными параметрами для форматирования строки
+        static string StringFormat(string input, bool toLower = false, string suffix = "")
+        {
+            string result = input;
+            if (toLower)
+                result = result.ToLower();
+            if (!string.IsNullOrEmpty(suffix))
+                result += suffix;
+            return result;
+        }
+
+        // Задача 334: Реализуйте метод с именованными параметрами для настройки логирования
+        static string ConfigureLogger(string level = "WARNING", string format = "JSON", bool writeToFile = true)
+        {
+            return $"Log Level: {level}, Format: {format}, File Output: {writeToFile}";
+        }
+
+        // Задача 335: Напишите метод с именованными параметрами для фильтрации данных
+        static string ApplyFilters(string dataset, string condition = "", string order = "ASC", int maxResults = 50)
+        {
+            return $"Dataset: {dataset}, Condition: {condition}, Order: {order}, Max: {maxResults}";
+        }
+
+        // Задача 336: Создайте метод с именованными параметрами для отправки email
+        static string SendEmailMessage(string recipient, string subject = "Notification", string message = "", int priority = 1)
+        {
+            return $"To: {recipient}, Subject: {subject}, Priority: {priority}, Message: {message}";
+        }
+
+        // Задача 337: Напишите метод с именованными параметрами для создания отчета
+        static string GenerateReport(string title, string author = "System", DateTime? date = null, string format = "PDF")
+        {
+            DateTime reportDate = date ?? DateTime.Now;
+            return $"Report: {title}, Author: {author}, Date: {reportDate:yyyy-MM-dd}, Format: {format}";
+        }
+
+        // Задача 338: Напишите метод с опциональными параметрами для валидации формы
+        static bool CheckForm(string email, string name, bool validateEmail = true, int minNameLength = 2)
+        {
+            bool valid = !string.IsNullOrEmpty(name) && name.Length >= minNameLength;
+            if (validateEmail)
+                valid = valid && !string.IsNullOrEmpty(email) && email.Contains("@");
+            return valid;
+        }
+
+        // Задача 339: Напишите метод с именованными параметрами для создания конфигурации приложения
+        static string SetupConfiguration(string appName, int port = 8080, bool sslEnabled = false, string logLevel = "INFO")
+        {
+            return $"App: {appName}, Port: {port}, SSL: {sslEnabled}, Log: {logLevel}";
+        }
+
+        // Задача 340: Создайте метод с именованными параметрами для отправки email
+        static string ComposeEmail(string toAddress, string subjectLine = "Hello", string bodyText = "", string cc = "")
+        {
+            string result = $"To: {toAddress}, Subject: {subjectLine}";
+            if (!string.IsNullOrEmpty(bodyText))
+                result += $", Body: {bodyText}";
+            if (!string.IsNullOrEmpty(cc))
+                result += $", CC: {cc}";
+            return result;
+        }
+
+        // Задача 341: Реализуйте метод с именованными параметрами для построения SQL-запроса
+        static string CreateQuery(string table, string fields = "*", string condition = "", string sort = "")
+        {
+            string query = $"SELECT {fields} FROM {table}";
+            if (!string.IsNullOrEmpty(condition))
+                query += $" WHERE {condition}";
+            if (!string.IsNullOrEmpty(sort))
+                query += $" ORDER BY {sort}";
+            return query;
+        }
+
+        // Задача 342: Реализуйте метод с опциональным параметром для округления чисел
+        static float RoundFloat(float number, int precision = 1)
+        {
+            return (float)Math.Round(number, precision);
+        }
+
+        // Задача 343: Создайте метод с опциональным параметром для вычисления степени числа
+        static double CalculatePower(double baseValue, int power = 3)
+        {
+            return Math.Pow(baseValue, power);
+        }
+
+        // Задача 344: Напишите метод с именованными параметрами для создания конфигурации приложения
+        static string AppConfig(string name, string version = "1.0.0", bool enableCache = true, int timeout = 30)
+        {
+            return $"Name: {name}, Version: {version}, Cache: {enableCache}, Timeout: {timeout}s";
+        }
+
+        // Задача 345: Создайте метод с именованными параметрами для отправки email
+        static string Email(string to, string subject, string body = "", bool isHtml = false)
+        {
+            return $"To: {to}, Subject: {subject}, HTML: {isHtml}, Body: {body}";
+        }
+
+        // Задача 346: Создайте метод с именованными параметрами для расчета стоимости заказа
+        static decimal OrderTotal(decimal subtotal, decimal tax = 0.08m, decimal tip = 0m)
+        {
+            return subtotal * (1 + tax) + tip;
+        }
+
+        // Задача 347: Реализуйте метод с опциональным параметром для вывода сообщения с префиксом
+        static void Log(string message, string level = "INFO")
+        {
+            Console.WriteLine($"[{level}] {message}");
+        }
+
+        // Задача 348: Напишите метод с опциональным параметром для поиска в массиве
+        static int FindValue(int[] numbers, int value, int beginAt = 0)
+        {
+            for (int i = beginAt; i < numbers.Length; i++)
+            {
+                if (numbers[i] == value)
+                    return i;
+            }
+            return -1;
+        }
+
+        // Задача 349: Создайте метод с именованными параметрами для расчета стоимости заказа
+        static decimal ComputeTotal(decimal price, int quantity = 1, decimal discount = 0m, decimal tax = 0.1m)
+        {
+            return (price * quantity - discount) * (1 + tax);
+        }
+
+        // Задача 350: Создайте метод с именованными параметрами для расчета стоимости заказа
+        static decimal CalculateTotal(decimal baseAmount, decimal serviceFee = 2.5m, decimal discountPercent = 0m)
+        {
+            return baseAmount * (1 - discountPercent / 100) + serviceFee;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== ДЕМОНСТРАЦИЯ ОПЦИОНАЛЬНЫХ И ИМЕНОВАННЫХ ПАРАМЕТРОВ (301-350) ===\n");
+
+            // Задача 301
+            Console.WriteLine("Задача 301:");
+            Console.WriteLine(BuildSQLQuery(table: "Users"));
+            Console.WriteLine(BuildSQLQuery(table: "Products", columns: "id, name", where: "price > 100"));
+
+            // Задача 302
+            Console.WriteLine("\nЗадача 302:");
+            Console.WriteLine(CreateUser(username: "john_doe"));
+            Console.WriteLine(CreateUser(username: "jane_doe", email: "jane@example.com", isActive: false));
+
+            // Задача 303
+            Console.WriteLine("\nЗадача 303:");
+            Console.WriteLine(GenerateSQL(tableName: "Customers"));
+            Console.WriteLine(GenerateSQL(tableName: "Orders", whereClause: "status = 'shipped'", limit: 10));
+
+            // Задача 304
+            Console.WriteLine("\nЗадача 304:");
+            Console.WriteLine(FormatString("  hello world  "));
+            Console.WriteLine(FormatString("hello", toUpper: true, prefix: ">>> "));
+
+            // Задача 305
+            Console.WriteLine("\nЗадача 305:");
+            Console.WriteLine(CreateChart());
+            Console.WriteLine(CreateChart(width: 1024, height: 768, color: "red", title: "Sales Report"));
+
+            // Задача 306
+            Console.WriteLine("\nЗадача 306:");
+            Console.WriteLine(GeneratePassword());
+            Console.WriteLine(GeneratePassword(length: 12, includeSpecial: true));
+
+            // Задача 307
+            Console.WriteLine("\nЗадача 307:");
+            Console.WriteLine(CreatePassword());
+            Console.WriteLine(CreatePassword(length: 15, useUppercase: false));
+
+            // Задача 308
+            Console.WriteLine("\nЗадача 308:");
+            Console.WriteLine(RoundNumber(3.14159));
+            Console.WriteLine(RoundNumber(3.14159, 4));
+
+            // Задача 309
+            Console.WriteLine("\nЗадача 309:");
+            Console.WriteLine(CreateFile("document"));
+            Console.WriteLine(CreateFile("report", "pdf", "reports"));
+
+            // Задача 310
+            Console.WriteLine("\nЗадача 310:");
+            int[] numbers = { 1, 2, 3, 4, 5, 3 };
+            Console.WriteLine(FindInArray(numbers, 3));
+            Console.WriteLine(FindInArray(numbers, 3, 3));
+
+            // Задача 311
+            Console.WriteLine("\nЗадача 311:");
+            Console.WriteLine(ConnectToDatabase("localhost", "myDB"));
+            Console.WriteLine(ConnectToDatabase("db.server.com", "production", "user1", "pass123", 60));
+
+            // Задача 312
+            Console.WriteLine("\nЗадача 312:");
+            Console.WriteLine(MakeFilePath("invoice"));
+            Console.WriteLine(MakeFilePath("contract", "legal", "docx"));
+
+            // Задача 313
+            Console.WriteLine("\nЗадача 313:");
+            Console.WriteLine(SetupLogging());
+            Console.WriteLine(SetupLogging(logLevel: "DEBUG", enableConsole: false));
+
+            // Задача 314
+            Console.WriteLine("\nЗадача 314:");
+            string[] fruits = { "apple", "banana", "cherry", "banana" };
+            Console.WriteLine(SearchArray(fruits, "banana"));
+            Console.WriteLine(SearchArray(fruits, "banana", 2));
+
+            // Задача 315
+            Console.WriteLine("\nЗадача 315:");
+            Console.WriteLine(GetPageData());
+            Console.WriteLine(GetPageData(page: 3, pageSize: 25));
+
+            // Задача 316
+            Console.WriteLine("\nЗадача 316:");
+            PrintMessage("Application started");
+            PrintMessage("Error occurred", "ERROR");
+
+            // Задача 317
+            Console.WriteLine("\nЗадача 317:");
+            Console.WriteLine(SendEmail(to: "user@example.com"));
+            Console.WriteLine(SendEmail(to: "admin@example.com", subject: "Urgent", hasAttachment: true));
+
+            // Задача 318
+            Console.WriteLine("\nЗадача 318:");
+            Console.WriteLine(ValidateForm("user", "pass"));
+            Console.WriteLine(ValidateForm("user@test.com", "pass", checkEmail: true));
+
+            // Задача 319
+            Console.WriteLine("\nЗадача 319:");
+            Console.WriteLine(BuildFileName("data"));
+            Console.WriteLine(BuildFileName("config", "settings", "json"));
+
+            // Задача 320
+            Console.WriteLine("\nЗадача 320:");
+            Console.WriteLine(FormatText("hello world"));
+            Console.WriteLine(FormatText("This is a long text", capitalize: true, maxLength: 10));
+
+            // Задача 321
+            Console.WriteLine("\nЗадача 321:");
+            Console.WriteLine(Power(3));
+            Console.WriteLine(Power(2, 4));
+
+            // Задача 322
+            Console.WriteLine("\nЗадача 322:");
+            Console.WriteLine(ValidateUserInput("test123"));
+            Console.WriteLine(ValidateUserInput("user@name", allowSpecialChars: false));
+
+            // Задача 323
+            Console.WriteLine("\nЗадача 323:");
+            Console.WriteLine(ConstructSQL(fromTable: "Employees"));
+            Console.WriteLine(ConstructSQL(fromTable: "Sales", selectFields: "product, SUM(amount)", groupBy: "product"));
+
+            // Задача 324
+            Console.WriteLine("\nЗадача 324:");
+            Console.WriteLine(GenerateSecurePassword());
+            Console.WriteLine(GenerateSecurePassword(length: 16, includeSymbols: false));
+
+            // Задача 325
+            Console.WriteLine("\nЗадача 325:");
+            Console.WriteLine(CalculateOrder(100m));
+            Console.WriteLine(CalculateOrder(100m, discount: 10m, shipping: 0m));
+
+            // Задача 326
+            Console.WriteLine("\nЗадача 326:");
+            Console.WriteLine(ProcessString("hello world"));
+            Console.WriteLine(ProcessString("hello world", reverse: true, removeSpaces: true));
+
+            // Задача 327
+            Console.WriteLine("\nЗадача 327:");
+            Console.WriteLine(CreateAppConfig("MyApp"));
+            Console.WriteLine(CreateAppConfig("TestApp", debugMode: true, environment: "development"));
+
+            // Задача 328
+            Console.WriteLine("\nЗадача 328:");
+            Console.WriteLine(DatabaseConnection("localhost", "test_db"));
+            Console.WriteLine(DatabaseConnection("db.example.com", "prod_db", port: 3306));
+
+            // Задача 329
+            Console.WriteLine("\nЗадача 329:");
+            Console.WriteLine(RoundDecimal(123.4567m));
+            Console.WriteLine(RoundDecimal(123.4567m, 3));
+
+            // Задача 330
+            Console.WriteLine("\nЗадача 330:");
+            double[] values = { 1.1, 2.2, 3.3, 2.2 };
+            Console.WriteLine(ArraySearch(values, 2.2));
+            Console.WriteLine(ArraySearch(values, 2.2, 2));
+
+            // Задача 331
+            Console.WriteLine("\nЗадача 331:");
+            DisplayMessage("System initialized");
+            DisplayMessage("Critical error!", "ERROR");
+
+            // Задача 332
+            Console.WriteLine("\nЗадача 332:");
+            Console.WriteLine(FilterData("users"));
+            Console.WriteLine(FilterData("products", filterBy: "category='electronics'", limit: 20));
+
+            // Задача 333
+            Console.WriteLine("\nЗадача 333:");
+            Console.WriteLine(StringFormat("HELLO"));
+            Console.WriteLine(StringFormat("hello", toLower: false, suffix: "!"));
+
+            // Задача 334
+            Console.WriteLine("\nЗадача 334:");
+            Console.WriteLine(ConfigureLogger());
+            Console.WriteLine(ConfigureLogger(level: "ERROR", format: "TEXT"));
+
+            // Задача 335
+            Console.WriteLine("\nЗадача 335:");
+            Console.WriteLine(ApplyFilters("customers"));
+            Console.WriteLine(ApplyFilters("orders", condition: "amount > 100", order: "DESC"));
+
+            // Задача 336
+            Console.WriteLine("\nЗадача 336:");
+            Console.WriteLine(SendEmailMessage("recipient@test.com"));
+            Console.WriteLine(SendEmailMessage("boss@company.com", priority: 3, subject: "Monthly Report"));
+
+            // Задача 337
+            Console.WriteLine("\nЗадача 337:");
+            Console.WriteLine(GenerateReport("Annual Summary"));
+            Console.WriteLine(GenerateReport("Q1 Results", author: "John Smith", format: "Excel"));
+
+            // Задача 338
+            Console.WriteLine("\nЗадача 338:");
+            Console.WriteLine(CheckForm("test@example.com", "John"));
+            Console.WriteLine(CheckForm("invalid", "A", validateEmail: true));
+
+            // Задача 339
+            Console.WriteLine("\nЗадача 339:");
+            Console.WriteLine(SetupConfiguration("WebApp"));
+            Console.WriteLine(SetupConfiguration("API", port: 443, sslEnabled: true));
+
+            // Задача 340
+            Console.WriteLine("\nЗадача 340:");
+            Console.WriteLine(ComposeEmail("friend@example.com"));
+            Console.WriteLine(ComposeEmail("team@work.com", subjectLine: "Meeting", cc: "manager@work.com"));
+
+            // Задача 341
+            Console.WriteLine("\nЗадача 341:");
+            Console.WriteLine(CreateQuery(table: "Products"));
+            Console.WriteLine(CreateQuery(table: "Users", condition: "active = true", sort: "name"));
+
+            // Задача 342
+            Console.WriteLine("\nЗадача 342:");
+            Console.WriteLine(RoundFloat(3.14159f));
+            Console.WriteLine(RoundFloat(3.14159f, 3));
+
+            // Задача 343
+            Console.WriteLine("\nЗадача 343:");
+            Console.WriteLine(CalculatePower(2));
+            Console.WriteLine(CalculatePower(2, 5));
+
+            // Задача 344
+            Console.WriteLine("\nЗадача 344:");
+            Console.WriteLine(AppConfig("MobileApp"));
+            Console.WriteLine(AppConfig("WebService", enableCache: false, timeout: 60));
+
+            // Задача 345
+            Console.WriteLine("\nЗадача 345:");
+            Console.WriteLine(Email(to: "user@test.com", subject: "Welcome"));
+            Console.WriteLine(Email(to: "client@company.com", subject: "Invoice", isHtml: true));
+
+            // Задача 346
+            Console.WriteLine("\nЗадача 346:");
+            Console.WriteLine(OrderTotal(50m));
+            Console.WriteLine(OrderTotal(50m, tip: 10m));
+
+            // Задача 347
+            Console.WriteLine("\nЗадача 347:");
+            Log("Process completed");
+            Log("Database connection failed", "ERROR");
+
+            // Задача 348
+            Console.WriteLine("\nЗадача 348:");
+            int[] data = { 10, 20, 30, 20, 40 };
+            Console.WriteLine(FindValue(data, 20));
+            Console.WriteLine(FindValue(data, 20, 2));
+
+            // Задача 349
+            Console.WriteLine("\nЗадача 349:");
+            Console.WriteLine(ComputeTotal(25m));
+            Console.WriteLine(ComputeTotal(25m, quantity: 3, discount: 10m));
+
+            // Задача 350
+            Console.WriteLine("\nЗадача 350:");
+            Console.WriteLine(CalculateTotal(100m));
+            Console.WriteLine(CalculateTotal(100m, discountPercent: 15m));
+        }
+    }
+}
