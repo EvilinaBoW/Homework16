@@ -1,0 +1,733 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp5
+{
+    public class Program
+    {
+        // Задача 101: Создайте рекурсивную функцию для проверки, является ли строка палиндромом
+        static bool IsPalindromeRecursive(string str)
+        {
+            return IsPalindromeHelper(str, 0, str.Length - 1);
+        }
+
+        static bool IsPalindromeHelper(string str, int left, int right)
+        {
+            if (left >= right)
+                return true;
+            if (char.ToLower(str[left]) != char.ToLower(str[right]))
+                return false;
+            return IsPalindromeHelper(str, left + 1, right - 1);
+        }
+
+        // Задача 102: Напишите рекурсивную функцию для генерации всех подмножеств множества
+        static List<List<int>> GenerateSubsets(int[] nums)
+        {
+            List<List<int>> result = new List<List<int>>();
+            GenerateSubsetsHelper(nums, 0, new List<int>(), result);
+            return result;
+        }
+
+        static void GenerateSubsetsHelper(int[] nums, int index, List<int> current, List<List<int>> result)
+        {
+            if (index == nums.Length)
+            {
+                result.Add(new List<int>(current));
+                return;
+            }
+
+            // Не включаем текущий элемент
+            GenerateSubsetsHelper(nums, index + 1, current, result);
+
+            // Включаем текущий элемент
+            current.Add(nums[index]);
+            GenerateSubsetsHelper(nums, index + 1, current, result);
+            current.RemoveAt(current.Count - 1);
+        }
+
+        // Задача 103: Напишите рекурсивную функцию для генерации всех подмножеств множества
+        static List<List<T>> GetAllSubsets<T>(T[] set)
+        {
+            List<List<T>> subsets = new List<List<T>>();
+            GenerateSubsets(set, 0, new List<T>(), subsets);
+            return subsets;
+        }
+
+        static void GenerateSubsets<T>(T[] set, int index, List<T> current, List<List<T>> subsets)
+        {
+            subsets.Add(new List<T>(current));
+
+            for (int i = index; i < set.Length; i++)
+            {
+                current.Add(set[i]);
+                GenerateSubsets(set, i + 1, current, subsets);
+                current.RemoveAt(current.Count - 1);
+            }
+        }
+
+        // Задача 104: Напишите рекурсивный метод для вычисления суммы цифр числа
+        static int SumOfDigits(int number)
+        {
+            if (number == 0)
+                return 0;
+            return number % 10 + SumOfDigits(number / 10);
+        }
+
+        // Задача 105: Реализуйте рекурсивный метод для вычисления биномиального коэффициента
+        static int BinomialCoefficient(int n, int k)
+        {
+            if (k == 0 || k == n)
+                return 1;
+            return BinomialCoefficient(n - 1, k - 1) + BinomialCoefficient(n - 1, k);
+        }
+
+        // Задача 106: Создайте рекурсивную функцию для вычисления произведения элементов массива
+        static int ProductOfArray(int[] arr)
+        {
+            return ProductOfArrayHelper(arr, 0);
+        }
+
+        static int ProductOfArrayHelper(int[] arr, int index)
+        {
+            if (index >= arr.Length)
+                return 1;
+            return arr[index] * ProductOfArrayHelper(arr, index + 1);
+        }
+
+        // Задача 107: Реализуйте рекурсивный метод для вычисления биномиального коэффициента
+        static int C(int n, int k)
+        {
+            if (k < 0 || k > n)
+                return 0;
+            if (k == 0 || k == n)
+                return 1;
+            return C(n - 1, k - 1) + C(n - 1, k);
+        }
+
+        // Задача 108: Реализуйте рекурсивный метод для проверки отсортированности массива
+        static bool IsSorted(int[] arr)
+        {
+            return IsSortedHelper(arr, 0);
+        }
+
+        static bool IsSortedHelper(int[] arr, int index)
+        {
+            if (index >= arr.Length - 1)
+                return true;
+            if (arr[index] > arr[index + 1])
+                return false;
+            return IsSortedHelper(arr, index + 1);
+        }
+
+        // Задача 109: Напишите рекурсивную функцию для поиска максимума в массиве
+        static int FindMax(int[] arr)
+        {
+            return FindMaxHelper(arr, 0, arr[0]);
+        }
+
+        static int FindMaxHelper(int[] arr, int index, int currentMax)
+        {
+            if (index >= arr.Length)
+                return currentMax;
+            if (arr[index] > currentMax)
+                currentMax = arr[index];
+            return FindMaxHelper(arr, index + 1, currentMax);
+        }
+
+        // Задача 110: Создайте рекурсивную функцию для проверки, является ли строка палиндромом
+        static bool RecursivePalindromeCheck(string str)
+        {
+            if (str.Length <= 1)
+                return true;
+            if (char.ToLower(str[0]) != char.ToLower(str[str.Length - 1]))
+                return false;
+            return RecursivePalindromeCheck(str.Substring(1, str.Length - 2));
+        }
+
+        // Задача 111: Создайте рекурсивный метод для нахождения НОД двух чисел
+        static int GCDRecursive(int a, int b)
+        {
+            if (b == 0)
+                return Math.Abs(a);
+            return GCDRecursive(b, a % b);
+        }
+
+        // Задача 112: Создайте рекурсивный метод для решения задачи Ханойской башни
+        static void TowerOfHanoi(int n, char fromRod, char toRod, char auxRod)
+        {
+            if (n == 1)
+            {
+                Console.WriteLine($"Переместить диск 1 с {fromRod} на {toRod}");
+                return;
+            }
+            TowerOfHanoi(n - 1, fromRod, auxRod, toRod);
+            Console.WriteLine($"Переместить диск {n} с {fromRod} на {toRod}");
+            TowerOfHanoi(n - 1, auxRod, toRod, fromRod);
+        }
+
+        // Задача 113: Реализуйте рекурсивную функцию для вычисления треугольника Паскаля
+        static int PascalTriangle(int row, int col)
+        {
+            if (col == 0 || col == row)
+                return 1;
+            return PascalTriangle(row - 1, col - 1) + PascalTriangle(row - 1, col);
+        }
+
+        // Задача 114: Напишите рекурсивный метод для вычисления суммы чисел от 1 до N
+        static int SumToN(int n)
+        {
+            if (n <= 0)
+                return 0;
+            return n + SumToN(n - 1);
+        }
+
+        // Задача 115: Создайте рекурсивную функцию для вычисления чисел Фибоначчи
+        static int Fibonacci(int n)
+        {
+            if (n <= 1)
+                return n;
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
+        }
+
+        // Задача 116: Реализуйте рекурсивную функцию для вычисления степени числа
+        static double Power(double baseNum, int exponent)
+        {
+            if (exponent == 0)
+                return 1;
+            if (exponent < 0)
+                return 1 / Power(baseNum, -exponent);
+            return baseNum * Power(baseNum, exponent - 1);
+        }
+
+        // Задача 117: Создайте рекурсивный метод для нахождения НОД двух чисел
+        static int RecursiveGCD(int a, int b)
+        {
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+            if (b == 0)
+                return a;
+            return RecursiveGCD(b, a % b);
+        }
+
+        // Задача 118: Напишите рекурсивную функцию для реверса строки
+        static string ReverseStringRecursive(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return str;
+            return ReverseStringRecursive(str.Substring(1)) + str[0];
+        }
+
+        // Задача 119: Создайте рекурсивную функцию для вычисления произведения элементов массива
+        static long ArrayProduct(int[] arr)
+        {
+            return ArrayProductHelper(arr, 0);
+        }
+
+        static long ArrayProductHelper(int[] arr, int index)
+        {
+            if (index >= arr.Length)
+                return 1;
+            return arr[index] * ArrayProductHelper(arr, index + 1);
+        }
+
+        // Задача 120: Создайте рекурсивную функцию для проверки вхождения подстроки в строку
+        static bool ContainsSubstring(string str, string substring)
+        {
+            if (substring.Length > str.Length)
+                return false;
+            if (str.StartsWith(substring))
+                return true;
+            return ContainsSubstring(str.Substring(1), substring);
+        }
+
+        // Задача 121: Напишите рекурсивный метод для вычисления суммы чисел от 1 до N
+        static int RecursiveSum(int n)
+        {
+            if (n == 0)
+                return 0;
+            return n + RecursiveSum(n - 1);
+        }
+
+        // Задача 122: Реализуйте рекурсивный метод для проверки отсортированности массива
+        static bool IsArraySorted(int[] arr)
+        {
+            return IsArraySortedHelper(arr, 1);
+        }
+
+        static bool IsArraySortedHelper(int[] arr, int index)
+        {
+            if (index >= arr.Length)
+                return true;
+            if (arr[index] < arr[index - 1])
+                return false;
+            return IsArraySortedHelper(arr, index + 1);
+        }
+
+        // Задача 123: Реализуйте рекурсивный метод для проверки отсортированности массива
+        static bool CheckSorted(int[] arr, int index = 0)
+        {
+            if (index >= arr.Length - 1)
+                return true;
+            return arr[index] <= arr[index + 1] && CheckSorted(arr, index + 1);
+        }
+
+        // Задача 124: Создайте рекурсивную функцию для проверки вхождения подстроки в строку
+        static bool SubstringExists(string text, string pattern)
+        {
+            if (pattern.Length > text.Length)
+                return false;
+            if (text.Substring(0, pattern.Length) == pattern)
+                return true;
+            return SubstringExists(text.Substring(1), pattern);
+        }
+
+        // Задача 125: Напишите рекурсивный метод для преобразования числа в двоичную систему
+        static string ToBinary(int number)
+        {
+            if (number == 0)
+                return "0";
+            if (number == 1)
+                return "1";
+            return ToBinary(number / 2) + (number % 2).ToString();
+        }
+
+        // Задача 126: Создайте рекурсивный метод для решения задачи Ханойской башни
+        static void SolveHanoi(int disks, string source, string destination, string auxiliary)
+        {
+            if (disks == 1)
+            {
+                Console.WriteLine($"Move disk 1 from {source} to {destination}");
+                return;
+            }
+            SolveHanoi(disks - 1, source, auxiliary, destination);
+            Console.WriteLine($"Move disk {disks} from {source} to {destination}");
+            SolveHanoi(disks - 1, auxiliary, destination, source);
+        }
+
+        // Задача 127: Напишите рекурсивный метод для вычисления суммы цифр числа
+        static int DigitalSum(int n)
+        {
+            if (n == 0)
+                return 0;
+            return n % 10 + DigitalSum(n / 10);
+        }
+
+        // Задача 128: Напишите рекурсивную функцию для генерации всех подмножеств множества
+        static List<List<int>> PowerSet(int[] set)
+        {
+            List<List<int>> result = new List<List<int>>();
+            GeneratePowerSet(set, 0, new List<int>(), result);
+            return result;
+        }
+
+        static void GeneratePowerSet(int[] set, int index, List<int> current, List<List<int>> result)
+        {
+            if (index == set.Length)
+            {
+                result.Add(new List<int>(current));
+                return;
+            }
+
+            // Исключаем элемент
+            GeneratePowerSet(set, index + 1, current, result);
+
+            // Включаем элемент
+            current.Add(set[index]);
+            GeneratePowerSet(set, index + 1, current, result);
+            current.RemoveAt(current.Count - 1);
+        }
+
+        // Задача 129: Реализуйте рекурсивный метод для вычисления факториала числа
+        static long Factorial(int n)
+        {
+            if (n <= 1)
+                return 1;
+            return n * Factorial(n - 1);
+        }
+
+        // Задача 130: Реализуйте рекурсивную функцию для вычисления степени числа
+        static double RecursivePower(double x, int n)
+        {
+            if (n == 0)
+                return 1;
+            if (n > 0)
+                return x * RecursivePower(x, n - 1);
+            return 1 / RecursivePower(x, -n);
+        }
+
+        // Задача 131: Напишите рекурсивную функцию для генерации всех подмножеств множества
+        static List<List<char>> GetSubsets(char[] chars)
+        {
+            List<List<char>> subsets = new List<List<char>>();
+            BuildSubsets(chars, 0, new List<char>(), subsets);
+            return subsets;
+        }
+
+        static void BuildSubsets(char[] chars, int index, List<char> current, List<List<char>> subsets)
+        {
+            if (index == chars.Length)
+            {
+                subsets.Add(new List<char>(current));
+                return;
+            }
+
+            // Без текущего элемента
+            BuildSubsets(chars, index + 1, current, subsets);
+
+            // С текущим элементом
+            current.Add(chars[index]);
+            BuildSubsets(chars, index + 1, current, subsets);
+            current.RemoveAt(current.Count - 1);
+        }
+
+        // Задача 132: Напишите рекурсивный метод для вычисления суммы цифр числа
+        static int SumDigits(int num)
+        {
+            if (num < 10)
+                return num;
+            return num % 10 + SumDigits(num / 10);
+        }
+
+        // Задача 133: Создайте рекурсивный метод для обхода массива и вывода его элементов
+        static void PrintArray(int[] arr)
+        {
+            PrintArrayHelper(arr, 0);
+        }
+
+        static void PrintArrayHelper(int[] arr, int index)
+        {
+            if (index >= arr.Length)
+                return;
+            Console.Write(arr[index] + " ");
+            PrintArrayHelper(arr, index + 1);
+        }
+
+        // Задача 134: Реализуйте рекурсивную функцию для вычисления степени числа
+        static int PowerInt(int baseNum, int exponent)
+        {
+            if (exponent == 0)
+                return 1;
+            return baseNum * PowerInt(baseNum, exponent - 1);
+        }
+
+        // Задача 135: Реализуйте рекурсивную функцию Аккермана
+        static int Ackermann(int m, int n)
+        {
+            if (m == 0)
+                return n + 1;
+            if (n == 0)
+                return Ackermann(m - 1, 1);
+            return Ackermann(m - 1, Ackermann(m, n - 1));
+        }
+
+        // Задача 136: Создайте рекурсивную функцию для вычисления произведения элементов массива
+        static long MultiplyArray(int[] arr, int index = 0)
+        {
+            if (index >= arr.Length)
+                return 1;
+            return arr[index] * MultiplyArray(arr, index + 1);
+        }
+
+        // Задача 137: Напишите рекурсивную функцию для реверса строки
+        static string RecursiveReverse(string s)
+        {
+            if (s.Length <= 1)
+                return s;
+            return s[s.Length - 1] + RecursiveReverse(s.Substring(0, s.Length - 1));
+        }
+
+        // Задача 138: Напишите рекурсивный метод для преобразования числа в двоичную систему
+        static string DecimalToBinary(int n)
+        {
+            if (n == 0)
+                return "";
+            return DecimalToBinary(n / 2) + (n % 2).ToString();
+        }
+
+        // Задача 139: Реализуйте рекурсивный метод для вычисления факториала числа
+        static long RecursiveFactorial(int n)
+        {
+            if (n <= 1)
+                return 1;
+            return n * RecursiveFactorial(n - 1);
+        }
+
+        // Задача 140: Напишите рекурсивный метод для вычисления суммы цифр числа
+        static int DigitSum(int number)
+        {
+            if (number == 0)
+                return 0;
+            return (number % 10) + DigitSum(number / 10);
+        }
+
+        // Задача 141: Создайте рекурсивный метод для решения задачи Ханойской башни
+        static void Hanoi(int n, char from, char to, char temp)
+        {
+            if (n == 0)
+                return;
+            Hanoi(n - 1, from, temp, to);
+            Console.WriteLine($"Move disk {n} from {from} to {to}");
+            Hanoi(n - 1, temp, to, from);
+        }
+
+        // Задача 142: Напишите рекурсивную функцию для реверса строки
+        static string ReverseRecursive(string input)
+        {
+            if (input.Length == 0)
+                return input;
+            return ReverseRecursive(input.Substring(1)) + input[0];
+        }
+
+        // Задача 143: Создайте рекурсивный метод для решения задачи Ханойской башни
+        static void TowersOfHanoi(int n, string source, string dest, string aux)
+        {
+            if (n > 0)
+            {
+                TowersOfHanoi(n - 1, source, aux, dest);
+                Console.WriteLine($"Переместить диск {n} с {source} на {dest}");
+                TowersOfHanoi(n - 1, aux, dest, source);
+            }
+        }
+
+        // Задача 144: Реализуйте рекурсивную функцию для вычисления степени числа
+        static double PowerRecursive(double x, int n)
+        {
+            if (n == 0)
+                return 1.0;
+            if (n < 0)
+                return 1.0 / PowerRecursive(x, -n);
+            return x * PowerRecursive(x, n - 1);
+        }
+
+        // Задача 145: Реализуйте рекурсивную функцию Аккермана
+        static int AckermannFunction(int m, int n)
+        {
+            if (m == 0)
+                return n + 1;
+            if (n == 0)
+                return AckermannFunction(m - 1, 1);
+            return AckermannFunction(m - 1, AckermannFunction(m, n - 1));
+        }
+
+        // Задача 146: Создайте рекурсивный метод для решения задачи Ханойской башни
+        static void HanoiTower(int disks, char start, char end, char intermediate)
+        {
+            if (disks == 1)
+            {
+                Console.WriteLine($"Диск 1: {start} -> {end}");
+                return;
+            }
+            HanoiTower(disks - 1, start, intermediate, end);
+            Console.WriteLine($"Диск {disks}: {start} -> {end}");
+            HanoiTower(disks - 1, intermediate, end, start);
+        }
+
+        // Задача 147: Создайте рекурсивную функцию для проверки вхождения подстроки в строку
+        static bool FindSubstring(string text, string substring, int index = 0)
+        {
+            if (index + substring.Length > text.Length)
+                return false;
+            if (text.Substring(index, substring.Length) == substring)
+                return true;
+            return FindSubstring(text, substring, index + 1);
+        }
+
+        // Задача 148: Реализуйте рекурсивный метод для подсчета количества цифр в числе
+        static int CountDigits(int number)
+        {
+            if (number == 0)
+                return 0;
+            return 1 + CountDigits(number / 10);
+        }
+
+        // Задача 149: Создайте рекурсивный метод для нахождения НОД двух чисел
+        static int EuclideanGCD(int a, int b)
+        {
+            if (b == 0)
+                return Math.Abs(a);
+            return EuclideanGCD(b, a % b);
+        }
+
+        // Задача 150: Напишите рекурсивную функцию для поиска максимума в массиве
+        static int RecursiveMax(int[] arr, int index = 0)
+        {
+            if (index == arr.Length - 1)
+                return arr[index];
+            int maxOfRest = RecursiveMax(arr, index + 1);
+            return Math.Max(arr[index], maxOfRest);
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== ДЕМОНСТРАЦИЯ РЕКУРСИВНЫХ ФУНКЦИЙ (101-150) ===\n");
+
+            // Задача 101
+            Console.WriteLine("Задача 101: 'radar' палиндром? " + IsPalindromeRecursive("radar"));
+
+            // Задача 102
+            int[] set1 = { 1, 2 };
+            var subsets1 = GenerateSubsets(set1);
+            Console.WriteLine("Задача 102: Подмножества [1,2]: " + string.Join("; ", subsets1.Select(s => $"[{string.Join(",", s)}]")));
+
+            // Задача 103
+            char[] set2 = { 'a', 'b' };
+            var subsets2 = GetAllSubsets(set2);
+            Console.WriteLine("Задача 103: Подмножества ['a','b']: " + string.Join("; ", subsets2.Select(s => $"[{string.Join(",", s)}]")));
+
+            // Задача 104
+            Console.WriteLine("Задача 104: Сумма цифр 123 = " + SumOfDigits(123));
+
+            // Задача 105
+            Console.WriteLine("Задача 105: C(5,2) = " + BinomialCoefficient(5, 2));
+
+            // Задача 106
+            Console.WriteLine("Задача 106: Произведение [2,3,4] = " + ProductOfArray(new int[] { 2, 3, 4 }));
+
+            // Задача 107
+            Console.WriteLine("Задача 107: C(4,2) = " + C(4, 2));
+
+            // Задача 108
+            Console.WriteLine("Задача 108: [1,2,3] отсортирован? " + IsSorted(new int[] { 1, 2, 3 }));
+
+            // Задача 109
+            Console.WriteLine("Задача 109: Максимум [3,1,4,2] = " + FindMax(new int[] { 3, 1, 4, 2 }));
+
+            // Задача 110
+            Console.WriteLine("Задача 110: 'level' палиндром? " + RecursivePalindromeCheck("level"));
+
+            // Задача 111
+            Console.WriteLine("Задача 111: НОД(48,18) = " + GCDRecursive(48, 18));
+
+            // Задача 112
+            Console.WriteLine("Задача 112: Ханойская башня (3 диска):");
+            TowerOfHanoi(3, 'A', 'C', 'B');
+
+            // Задача 113
+            Console.WriteLine("Задача 113: Треугольник Паскаля (3,1) = " + PascalTriangle(3, 1));
+
+            // Задача 114
+            Console.WriteLine("Задача 114: Сумма 1..5 = " + SumToN(5));
+
+            // Задача 115
+            Console.WriteLine("Задача 115: Фибоначчи(6) = " + Fibonacci(6));
+
+            // Задача 116
+            Console.WriteLine("Задача 116: 2^5 = " + Power(2, 5));
+
+            // Задача 117
+            Console.WriteLine("Задача 117: НОД(56,98) = " + RecursiveGCD(56, 98));
+
+            // Задача 118
+            Console.WriteLine("Задача 118: Реверс 'hello' = " + ReverseStringRecursive("hello"));
+
+            // Задача 119
+            Console.WriteLine("Задача 119: Произведение [1,2,3,4] = " + ArrayProduct(new int[] { 1, 2, 3, 4 }));
+
+            // Задача 120
+            Console.WriteLine("Задача 120: 'hello' содержит 'ell'? " + ContainsSubstring("hello", "ell"));
+
+            // Задача 121
+            Console.WriteLine("Задача 121: Сумма 1..10 = " + RecursiveSum(10));
+
+            // Задача 122
+            Console.WriteLine("Задача 122: [1,3,2] отсортирован? " + IsArraySorted(new int[] { 1, 3, 2 }));
+
+            // Задача 123
+            Console.WriteLine("Задача 123: [1,2,3] отсортирован? " + CheckSorted(new int[] { 1, 2, 3 }));
+
+            // Задача 124
+            Console.WriteLine("Задача 124: 'world' содержит 'orl'? " + SubstringExists("world", "orl"));
+
+            // Задача 125
+            Console.WriteLine("Задача 125: 10 в двоичной = " + ToBinary(10));
+
+            // Задача 126
+            Console.WriteLine("Задача 126: Ханойская башня (2 диска):");
+            SolveHanoi(2, "A", "C", "B");
+
+            // Задача 127
+            Console.WriteLine("Задача 127: Сумма цифр 456 = " + DigitalSum(456));
+
+            // Задача 128
+            int[] set3 = { 1 };
+            var subsets3 = PowerSet(set3);
+            Console.WriteLine("Задача 128: Подмножества [1]: " + string.Join("; ", subsets3.Select(s => $"[{string.Join(",", s)}]")));
+
+            // Задача 129
+            Console.WriteLine("Задача 129: Факториал 5 = " + Factorial(5));
+
+            // Задача 130
+            Console.WriteLine("Задача 130: 3^4 = " + RecursivePower(3, 4));
+
+            // Задача 131
+            char[] set4 = { 'x' };
+            var subsets4 = GetSubsets(set4);
+            Console.WriteLine("Задача 131: Подмножества ['x']: " + string.Join("; ", subsets4.Select(s => $"[{string.Join(",", s)}]")));
+
+            // Задача 132
+            Console.WriteLine("Задача 132: Сумма цифр 789 = " + SumDigits(789));
+
+            // Задача 133
+            Console.Write("Задача 133: Вывод массива [1,2,3]: ");
+            PrintArray(new int[] { 1, 2, 3 });
+            Console.WriteLine();
+
+            // Задача 134
+            Console.WriteLine("Задача 134: 5^3 = " + PowerInt(5, 3));
+
+            // Задача 135
+            Console.WriteLine("Задача 135: Аккерман(2,1) = " + Ackermann(2, 1));
+
+            // Задача 136
+            Console.WriteLine("Задача 136: Произведение [5,2] = " + MultiplyArray(new int[] { 5, 2 }));
+
+            // Задача 137
+            Console.WriteLine("Задача 137: Реверс 'abc' = " + RecursiveReverse("abc"));
+
+            // Задача 138
+            Console.WriteLine("Задача 138: 15 в двоичной = " + DecimalToBinary(15));
+
+            // Задача 139
+            Console.WriteLine("Задача 139: Факториал 6 = " + RecursiveFactorial(6));
+
+            // Задача 140
+            Console.WriteLine("Задача 140: Сумма цифр 1024 = " + DigitSum(1024));
+
+            // Задача 141
+            Console.WriteLine("Задача 141: Ханойская башня (1 диск):");
+            Hanoi(1, 'A', 'C', 'B');
+
+            // Задача 142
+            Console.WriteLine("Задача 142: Реверс 'test' = " + ReverseRecursive("test"));
+
+            // Задача 143
+            Console.WriteLine("Задача 143: Ханойская башня (2 диска):");
+            TowersOfHanoi(2, "A", "C", "B");
+
+            // Задача 144
+            Console.WriteLine("Задача 144: 2^8 = " + PowerRecursive(2, 8));
+
+            // Задача 145
+            Console.WriteLine("Задача 145: Аккерман(1,2) = " + AckermannFunction(1, 2));
+
+            // Задача 146
+            Console.WriteLine("Задача 146: Ханойская башня (1 диск):");
+            HanoiTower(1, 'A', 'C', 'B');
+
+            // Задача 147
+            Console.WriteLine("Задача 147: 'programming' содержит 'gram'? " + FindSubstring("programming", "gram"));
+
+            // Задача 148
+            Console.WriteLine("Задача 148: Количество цифр в 12345 = " + CountDigits(12345));
+
+            // Задача 149
+            Console.WriteLine("Задача 149: НОД(36,60) = " + EuclideanGCD(36, 60));
+
+            // Задача 150
+            Console.WriteLine("Задача 150: Максимум [7,2,9,1] = " + RecursiveMax(new int[] { 7, 2, 9, 1 }));
+        }
+    }
+}
