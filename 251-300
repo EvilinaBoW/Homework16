@@ -418,7 +418,7 @@ namespace ConsoleApp5
             if (type == "email")
                 return email.Contains("@");
             else if (type == "phone")
-                return data.All(char.IsDigit);
+                return email.All(char.IsDigit); // Исправлено: data -> email
             else
                 return false;
         }
